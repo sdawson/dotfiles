@@ -1,0 +1,65 @@
+# OSX
+Icon?
+.DS_Store
+
+# Thumbnails
+._*
+
+.Trashes
+
+# Linux
+.*
+*~
+
+# Compiled source files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs
+*.log
+
+# DB
+*.sql
+*.sqlite
+
+# Vim
+*.swp
+*.swo
+.*.sw[a-z]
+*.un~
+
+# tags
+TAGS
+tags
+
+# SVN
+/.svn/*
+*/.svn/*
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.pdfsync
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+
+# Java
+*.class
