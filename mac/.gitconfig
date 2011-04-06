@@ -8,3 +8,15 @@
 	diff = auto
 	status = auto
 	branch = auto
+[core]
+  whitespace = trailing-space,space-before-tab
+  excludesfile = ~/.gitignore
+[diff]
+  renames = copies
+  mnemonicprefix = true
+[branch]
+  autosetupmerge = true
+[push]
+  default = tracking
+[rerere]
+  enabled = 1
