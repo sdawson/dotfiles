@@ -1,0 +1,10 @@
+[user]
+	name = Sophie Dawson
+	email = sophiecdawson@gmail.com
+[mergetool "diffmerge"]
+	cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+	trustExitCode = false
+[color]
+	diff = auto
+	status = auto
+	branch = auto
