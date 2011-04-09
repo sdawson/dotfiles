@@ -29,7 +29,8 @@ set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
 syntax on
-colorscheme desert
+set background=dark
+colorscheme ir_black
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -52,3 +53,7 @@ set history=50
 set nu
 set sm
 set wm=0
+
+if has('gui_running')
+  set guifont=DejaVu\ Sans\ Mono\ 8
+endif
