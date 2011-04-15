@@ -9,9 +9,9 @@ Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 
 xterm*title: xterm
-xterm*faceName: xft:deja vu sans mono:antialias=true:hinting=true
+xterm*faceName: xft:terminus:antialias=false:hinting=false
 xterm*faceSize: 8
-xterm*boldfaceName: xft:deja vu sans mono:bold:antialias=false
+xterm*boldfaceName: xft:deja vu sans mono:bold:antialias=true
 xterm*background: #262729
 xterm*foreground: light grey
 xterm*on4Clicks: group
