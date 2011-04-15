@@ -1,0 +1,35 @@
+*background:        #262626
+*foreground:        #686868
+!Justin Colors
+
+!black text
+*color0:           #242424
+*color8:           #cdb5cd
+
+!red text
+*color1:           #bf7979
+*color9:           #f4a45f
+
+!green text
+*color2:           #97b26b
+*color10:          #c5f779
+
+!yellow text
+*color3:           #cdcda1
+*color11:          #ffffaf
+
+!blue text
+*color4:           #86a2be
+*color12:          #98afd9
+
+!magenta text
+*color5:           #d9b798
+*color13:          #d7d998
+
+!cyan text
+*color6:           #a1b5cd
+*color14:          #a1b5cd
+
+!white
+*color7:           #ffffff
+*color15:          #dedede

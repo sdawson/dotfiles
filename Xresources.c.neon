@@ -1,0 +1,31 @@
+# Colorful Neon X colour scheme
+
+*background:        #262626
+*foreground:        #686868
+
+! Black
+*color0:        #5A5A5A
+!*color0:        #262729
+*color8:        #554444
+!*color8:        #3E3E3E
+! Red
+*color1:        #FF4747
+*color9:        #FF6767
+! Green
+*color2:        #AFC81C
+*color10:        #BFC81C
+! Yellow
+*color3:        #FDD338
+*color11:        #F4D461
+! Blue
+*color4:        #619AF4
+*color12:        #5496FF
+! Purple
+*color5:        #5F5A90
+*color13:        #826AB1
+! Cyan
+*color6:        #47E0FF
+*color14:        #2ED9FB
+! White
+*color7:        #FFFFFF
+*color15:        #DEDEDE
