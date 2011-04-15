@@ -29,9 +29,8 @@ set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
 syntax on
-colo baycomb
+colo molokai
 set background=dark
-#colorscheme desert
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/

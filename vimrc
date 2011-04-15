@@ -29,7 +29,7 @@ set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
 syntax on
-set background=dark
+set background=light
 colorscheme ir_black
 
 highlight ExtraWhitespace ctermbg=red guibg=red
