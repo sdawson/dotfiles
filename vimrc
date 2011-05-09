@@ -40,6 +40,7 @@ autocmd FileType make :set noexpandtab
 autocmd FileType c :set cindent
 autocmd FileType txt :set wrap
 autocmd FileType python :set textwidth=0
+autocmd FileType go :set textwidth=0
 filetype plugin indent on
 
 set backup
