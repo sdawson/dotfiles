@@ -5,6 +5,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Editor env variables
+export EDITOR=vim
+export VISUAL=vim
+export GIT_EDITOR=vim
+
 # PATH additions and env vars for Go
 export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
