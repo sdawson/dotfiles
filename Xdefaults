@@ -1,4 +1,4 @@
-#include "./Xresources.c.vimbrant"
+#include "./resources/Xresources.c.vimbrant"
 
 Xft.dpi: 96
 Xft.antialias: true
