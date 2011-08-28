@@ -41,6 +41,7 @@ autocmd FileType c :set cindent
 autocmd FileType txt :set wrap
 autocmd FileType python :set textwidth=0
 filetype plugin indent on
+filetype plugin on
 
 set backup
 set backupdir=~/.vim/backup
