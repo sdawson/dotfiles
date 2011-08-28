@@ -16,6 +16,8 @@ export GOROOT=${HOME}/dev/go
 export GOARCH=amd64
 export GOOS=linux
 
+source ${GOROOT}/misc/bash/go
+
 alias ls='ls --color=auto'
 alias sl='ls --color=auto'
 alias ll='ls --color=auto -l'
