@@ -57,3 +57,6 @@ set wm=0
 if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 8
 endif
+
+#
+call pathogen#infect()
