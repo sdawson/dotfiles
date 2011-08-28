@@ -59,5 +59,5 @@ if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 8
 endif
 
-#
+" pathogen
 call pathogen#infect()

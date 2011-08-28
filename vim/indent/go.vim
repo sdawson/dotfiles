@@ -1,0 +1,1 @@
+/home/soph/dev/go/misc/vim/indent/go.vim
