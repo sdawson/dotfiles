@@ -63,3 +63,6 @@ tags
 
 # Java
 *.class
+
+# Python
+*.pyc
