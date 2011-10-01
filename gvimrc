@@ -40,6 +40,7 @@ autocmd FileType make :set noexpandtab
 autocmd FileType c :set cindent
 autocmd FileType txt :set wrap
 autocmd FileType python :set textwidth=0
+autocmd FileType go :set textwidth=0
 filetype plugin indent on
 filetype plugin on
 
@@ -61,3 +62,9 @@ endif
 
 " pathogen
 call pathogen#infect()
+
+" Faster split movements
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
