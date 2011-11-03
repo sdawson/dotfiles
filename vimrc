@@ -69,6 +69,9 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+" Command-T file list refresh
+nmap <leader>f :CommandTFlush<CR>
+
 map ; :
 noremap ;; ;
 nnoremap ' `
