@@ -79,3 +79,15 @@ nnoremap ` '
 
 " Set leader from \ to <SPACE>
 let mapleader = " "
+
+" Highlight cols 81 and 82
+function! HighlightTooLongLines()
+  highlight def link RightMargin Error
+  if &textwidth != 0
+    exec 'match RightMargin /\%<' . (&textwidth + 3) . 'v.\%>' / (&textwidth + 1) . 'v/'
+  endif
+endfunction
+
+augroup filetypedetect
+au BufNewFile,BufRead * call HighlightTooLongLines()
+augroup END
