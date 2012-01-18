@@ -84,7 +84,7 @@ let mapleader = " "
 function! HighlightTooLongLines()
   highlight def link RightMargin Error
   if &textwidth != 0
-    exec 'match RightMargin /\%<' . (&textwidth + 3) . 'v.\%>' / (&textwidth + 1) . 'v/'
+    exec 'match RightMargin /\%<' . (&textwidth + 3) . 'v.\%>' . (&textwidth + 1) . 'v/'
   endif
 endfunction
 
