@@ -1,4 +1,24 @@
 set nocompatible
+filetype off
+
+call vundle#rc()
+
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'git://git.wincent.com/command-t.git'
+
+" Syntax related bundles
+Bundle 'leshill/vim-json'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'jcf/vim-latex'
+
+" Random
+Bundle 'skammer/vim-css-color'
+Bundle 'tpope/vim-speeddating'
+
+filetype plugin indent on
 
 set laststatus=2
 set cmdheight=2
