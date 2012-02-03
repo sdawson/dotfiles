@@ -21,9 +21,17 @@ export TRANSMISSION_HOME=${HOME}/.transmission
 export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
 export GOARCH=amd64
+
 if [ "$UNAME" = Linux ]; then
   export GOOS=linux
   alias unison='unison-gtk2'
+
+  PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+  alias ls='ls --color=auto'
+  alias sl='ls --color=auto'
+  alias ll='ls --color=auto -l'
+  alias la='ls --color=auto -al'
 elif [ "$UNAME" = Darwin ]; then
   export GOOS=darwin
 
@@ -36,18 +44,18 @@ elif [ "$UNAME" = Darwin ]; then
   if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
   fi
+
+  PS1='[\u@\h \W]\$ '
+
+  alias sl='ls'
+  alias ll='ls -l'
+  alias la='ls -al'
 fi
 
 source ${GOROOT}/misc/bash/go
 
-alias ls='ls --color=auto'
-alias sl='ls --color=auto'
-alias ll='ls --color=auto -l'
-alias la='ls --color=auto -al'
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
-
-PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
 # Load all completion files
 for config_file in `ls $DOT/**/completion/*`
