@@ -32,6 +32,9 @@ task :install do
     end
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end
+
+  puts "Installing vundle..."
+  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 end
 
 task :uninstall do
