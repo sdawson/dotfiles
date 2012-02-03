@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+: ${UNAME=$(uname)}
+
 # Shortcut to the dotfiles dir
 export $DOT=$HOME/.dotfiles
 
@@ -19,7 +21,11 @@ export TRANSMISSION_HOME=${HOME}/.transmission
 export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
 export GOARCH=amd64
-export GOOS=linux
+if [ "$UNAME" = Linux ]; then
+  export GOOS=linux
+elif [ "$UNAME" = Darwin ]; then
+  export GOOS=darwin
+fi
 
 source ${GOROOT}/misc/bash/go
 
@@ -34,4 +40,25 @@ alias unison='unison-gtk2'
 PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
 # Load all completion files
-for config_file ($DOT/**/completion/*) source $config_file
+for config_file in `ls $DOT/**/completion/*`
+do
+  source "$config_file"
+done
+
+# Load secret non-versioned stuff
+if [[ -f ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+# Mac specific settings
+if [ "$UNAME" = Darwin ]; then
+  # Brew path additions
+  export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+
+  # Exports for node
+  export NODE_PATH="/usr/local/lib/node"
+
+  if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+  fi
