@@ -1,4 +1,4 @@
-#include "./resources/Xresources.c.vimbrant"
+#include "$HOME/.dotfiles/x/resources/Xresources.c.vimbrant"
 
 Xft.dpi: 96
 Xft.antialias: true
