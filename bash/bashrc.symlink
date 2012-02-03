@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+# Shortcut to the dotfiles dir
+export $DOT=$HOME/.dotfiles
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -29,3 +32,6 @@ alias gitinfo='${HOME}/doc/dotfiles/git-info.txt'
 alias unison='unison-gtk2'
 
 PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+# Load all completion files
+for config_file ($DOT/**/completion/*) source $config_file
