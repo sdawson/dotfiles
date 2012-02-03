@@ -10,6 +10,8 @@ export EDITOR=vim
 export VISUAL=vim
 export GIT_EDITOR=vim
 
+export TRANSMISSION_HOME=${HOME}/.transmission
+
 # PATH additions and env vars for Go
 export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
@@ -27,5 +29,3 @@ alias gitinfo='${HOME}/doc/dotfiles/git-info.txt'
 alias unison='unison-gtk2'
 
 PS1='[\u@\h \W]\$ '
-
-
