@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Let Vundle manage Vundle
@@ -73,7 +74,7 @@ set wildchar=<TAB>
 set wildmenu
 set wildmode=longest,full
 
-if version >= 730
+if version >= 703
   set relativenumber
 else
   set nu
