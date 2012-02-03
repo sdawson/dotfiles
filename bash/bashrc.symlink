@@ -23,8 +23,19 @@ export GOROOT=${HOME}/dev/go
 export GOARCH=amd64
 if [ "$UNAME" = Linux ]; then
   export GOOS=linux
+  alias unison='unison-gtk2'
 elif [ "$UNAME" = Darwin ]; then
   export GOOS=darwin
+
+  # Brew path additions
+  export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+
+  # Exports for node
+  export NODE_PATH="/usr/local/lib/node"
+
+  if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+  fi
 fi
 
 source ${GOROOT}/misc/bash/go
@@ -35,7 +46,6 @@ alias ll='ls --color=auto -l'
 alias la='ls --color=auto -al'
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
-alias unison='unison-gtk2'
 
 PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
@@ -50,15 +60,3 @@ if [[ -f ~/.localrc ]]
 then
   source ~/.localrc
 fi
-
-# Mac specific settings
-if [ "$UNAME" = Darwin ]; then
-  # Brew path additions
-  export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
-
-  # Exports for node
-  export NODE_PATH="/usr/local/lib/node"
-
-  if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
-  fi
