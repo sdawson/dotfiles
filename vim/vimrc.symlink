@@ -14,6 +14,7 @@ Bundle 'leshill/vim-json'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'jcf/vim-latex'
+Bundle 'vim-scripts/django.vim'
 
 " Random
 Bundle 'skammer/vim-css-color'
@@ -104,6 +105,17 @@ nnoremap ` '
 
 " Set leader from \ to <SPACE>
 let mapleader = " "
+
+" Toggle between relative and absolute line numbers
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-t> :call NumberToggle()<CR>
 
 " Highlight cols 81 and 82
 function! HighlightTooLongLines()
