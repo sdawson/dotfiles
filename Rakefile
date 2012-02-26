@@ -59,4 +59,11 @@ task :uninstall do
   end
 end
 
+task :vundle do
+  puts "Installing vundle..."
+  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+  puts "Installing vundle plugins"
+  `vim +BundleInstall +qall`
+end
+
 task :default => 'install'
