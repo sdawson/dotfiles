@@ -13,7 +13,6 @@ Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'leshill/vim-json'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'jcf/vim-latex'
 Bundle 'vim-scripts/django.vim'
 Bundle 'vim-scripts/Vim-R-plugin'
 
