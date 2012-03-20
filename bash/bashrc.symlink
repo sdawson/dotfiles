@@ -15,6 +15,8 @@ export EDITOR=vim
 export VISUAL=vim
 export GIT_EDITOR=vim
 
+export COLUMNS
+
 export TRANSMISSION_HOME=${HOME}/.transmission
 
 # PATH additions and env vars for Go
@@ -22,7 +24,9 @@ export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
 export GOARCH=amd64
 
-if [ "$UNAME" = Linux ]; then
+unamestr=`uname`
+
+if [ "$unamestr" = "Linux" ]; then
   export GOOS=linux
   alias unison='unison-gtk2'
 
@@ -32,7 +36,7 @@ if [ "$UNAME" = Linux ]; then
   alias sl='ls --color=auto'
   alias ll='ls --color=auto -l'
   alias la='ls --color=auto -al'
-elif [ "$UNAME" = Darwin ]; then
+elif [ "$unamestr" = "Darwin" ]; then
   export GOOS=darwin
 
   # Brew path additions
@@ -56,6 +60,7 @@ source ${GOROOT}/misc/bash/go
 
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
+alias r="$(which R) --no-save"
 
 # Load all completion files
 for config_file in `ls $DOT/**/completion/*`

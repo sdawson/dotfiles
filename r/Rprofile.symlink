@@ -1,0 +1,31 @@
+#require("Defaults")
+#setDefaults(q, save="no")
+#useDefaults(q)
+
+options("digits.secs"=3)
+
+# Hardcoded default repo for CRAN
+r <- getOption("repos")
+r["CRAN"] <- "http://cran.ms.unimelb.edu.au/"
+options(repos = r)
+rm(r)
+
+# aliases
+# s <- base::summary
+# h <- utils::head
+# n <- base::names
+cs <- setwd
+pwd <- getwd
+lss <- dir
+
+last <- function(x) { tail(x, n=1) }
+
+tryCatch(
+  {options(
+    width = as.integer(Sys.getenv("COLUMNS")))},
+  error = function(err) {
+    write("Can't get your terminal width.  Put ``export COLUMNS`` in your \
+          .bashrc.  Setting width to 120 chars",
+          stderr());
+    options(width=120)}
+)

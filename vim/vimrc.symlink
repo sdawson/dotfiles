@@ -128,3 +128,6 @@ endfunction
 augroup filetypedetect
 au BufNewFile,BufRead * call HighlightTooLongLines()
 augroup END
+
+" Remove _ to <- replacement in vim-r-plugin
+let vimrplugin_underscore = 0
