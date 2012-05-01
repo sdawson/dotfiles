@@ -12,7 +12,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 " Syntax related bundles
 Bundle 'leshill/vim-json'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'plasticboy/vim-markdown'
+Bundle 'sdawson/vim-markdown'
 Bundle 'vim-scripts/django.vim'
 Bundle 'vim-scripts/Vim-R-plugin'
 
@@ -65,6 +65,7 @@ autocmd FileType c :set cindent
 autocmd FileType txt :set wrap
 autocmd FileType python :set textwidth=0
 autocmd FileType go :set textwidth=0
+autocmd FileType mkd :set textwidth=0
 filetype plugin indent on
 filetype plugin on
 
