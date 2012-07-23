@@ -132,3 +132,23 @@ augroup END
 
 " Remove _ to <- replacement in vim-r-plugin
 let vimrplugin_underscore = 0
+
+" line navigation stay the same when wrapping is on
+nmap j gj
+nmap k gk
+
+function WrapToggle()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal textwidth=0
+    setlocal wrapmargin=0
+  endif
+endfunction
+
+noremap <leader>w :call WrapToggle()<CR>
