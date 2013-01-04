@@ -152,3 +152,6 @@ function WrapToggle()
 endfunction
 
 noremap <leader>w :call WrapToggle()<CR>
+
+" Spellcheck settings
+set spl=en_gb
