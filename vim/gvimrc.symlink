@@ -1,3 +1,4 @@
 syntax on
 colo molokai
 set background=dark
+set guioptions-=r
