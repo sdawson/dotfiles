@@ -8,7 +8,7 @@
 export DOT=$HOME/.dotfiles
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+#[[ $- != *i* ]] && return
 
 # Editor env variables
 export EDITOR=vim
@@ -50,6 +50,10 @@ elif [ "$unamestr" = "Darwin" ]; then
 
   # Brew path additions
   export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+
+  # ROOT path additions
+  export PATH=${PATH}:${HOME}/dev/root/bin
+  export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/dev/root/lib
 
   # Exports for node
   export NODE_PATH="/usr/local/lib/node"
