@@ -20,14 +20,15 @@ export COLUMNS
 export TRANSMISSION_HOME=${HOME}/.transmission
 
 # PATH additions and env vars for Go
-export PATH=${PATH}:${HOME}/dev/go/bin
 export GOROOT=${HOME}/dev/go
+export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
 
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
   export GOOS=linux
+  export TERMINAL=xterm
   alias unison='unison-gtk2'
 
   PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
@@ -36,6 +37,14 @@ if [ "$unamestr" = "Linux" ]; then
   alias sl='ls --color=auto'
   alias ll='ls --color=auto -l'
   alias la='ls --color=auto -al'
+
+  #@$(ruby -rubygems -e "puts Gem.user_dir")/bin
+
+  # Adding arduino to PATH
+  export PATH=${PATH}:/usr/share/arduino-1.0
+
+  # Lang (locale info) for anki software
+  export LANG=en_AU.UTF-8
 elif [ "$unamestr" = "Darwin" ]; then
   export GOOS=darwin
 
