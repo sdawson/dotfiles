@@ -4,6 +4,21 @@ desc "Hook our dotfiles into system-standard positions."
 task :install do
   linkables = Dir.glob('*/**{.symlink}')
 
+  create_links linkables
+
+  puts "Installing vundle..."
+  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+  puts "Installing vundle plugins"
+  `vim +BundleInstall +qall`
+end
+
+task :vim_install do
+  linkables = Dir.glob('vim/**{.symlink}')
+
+  create_links linkables
+end
+
+def create_links linkables
   skip_all = false
   overwrite_all = false
   backup_all = false
@@ -32,11 +47,6 @@ task :install do
     end
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end
-
-  puts "Installing vundle..."
-  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
-  puts "Installing vundle plugins"
-  `vim +BundleInstall +qall`
 end
 
 task :uninstall do
