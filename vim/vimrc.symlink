@@ -54,7 +54,8 @@ set backspace=indent,eol,start
 
 syntax on
 set background=light
-colorscheme ir_black
+colorscheme molokai
+set t_Co=256
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -116,7 +117,7 @@ function! NumberToggle()
   endif
 endfunc
 
-nnoremap <C-t> :call NumberToggle()<CR>
+nnoremap <C-y> :call NumberToggle()<CR>
 
 " Highlight cols 81 and 82
 function! HighlightTooLongLines()
