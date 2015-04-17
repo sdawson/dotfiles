@@ -1,24 +1,26 @@
 set nocompatible
 filetype off
 
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-"
-"" Let Vundle manage Vundle
-"Bundle 'gmarik/vundle'
-"
-"Bundle 'git://git.wincent.com/command-t.git'
-"
-"" Syntax related bundles
-"Bundle 'leshill/vim-json'
-"Bundle 'kchmck/vim-coffee-script'
-"Bundle 'sdawson/vim-markdown'
-"Bundle 'vim-scripts/django.vim'
-"Bundle 'vim-scripts/Vim-R-plugin'
-"
-"" Random
-"Bundle 'skammer/vim-css-color'
-"Bundle 'tpope/vim-speeddating'
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'git://git.wincent.com/command-t.git'
+
+" Syntax related bundles
+Bundle 'leshill/vim-json'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'sdawson/vim-markdown'
+Bundle 'vim-scripts/django.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+" Bundle 'vim-scripts/Vim-R-plugin'
+
+" Random
+Bundle 'skammer/vim-css-color'
+Bundle 'tpope/vim-speeddating'
 
 filetype plugin indent on
 
