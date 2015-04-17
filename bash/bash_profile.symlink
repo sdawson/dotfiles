@@ -1,22 +1,22 @@
 . ~/.bashrc
 
-# Fix for 10.8.0 LD path bug
-
-# set an alternative sudo
-thesudo()
-{
-  # back up the LD_* variables
-  local BACK=$LD_LIBRARY_PATH
-
-  # unset LD_*
-  unset LD_LIBRARY_PATH
-
-  # calling sudo
-  /usr/bin/sudo "$@"
-
-  # restore LD_* after sudo finished
-  export LD_LIBRARY_PATH=$BACK
-}
-
-# redirect sudo
-alias sudo=thesudo
+# # Fix for 10.8.0 LD path bug
+#
+# # set an alternative sudo
+# thesudo()
+# {
+#   # back up the LD_* variables
+#   local BACK=$LD_LIBRARY_PATH
+#
+#   # unset LD_*
+#   unset LD_LIBRARY_PATH
+#
+#   # calling sudo
+#   /usr/bin/sudo "$@"
+#
+#   # restore LD_* after sudo finished
+#   export LD_LIBRARY_PATH=$BACK
+# }
+#
+# # redirect sudo
+# alias sudo=thesudo

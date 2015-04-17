@@ -14,7 +14,9 @@ Bundle 'leshill/vim-json'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'sdawson/vim-markdown'
 Bundle 'vim-scripts/django.vim'
-Bundle 'vim-scripts/Vim-R-plugin'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+" Bundle 'vim-scripts/Vim-R-plugin'
 
 " Random
 Bundle 'skammer/vim-css-color'
