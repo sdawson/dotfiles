@@ -69,7 +69,10 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias la='ls -al'
 fi
 
-source ${GOROOT}/misc/bash/go
+if [[ -f ${GOROOT}/misc/bash/go ]]
+then
+  source ${GOROOT}/misc/bash/go
+fi
 
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
