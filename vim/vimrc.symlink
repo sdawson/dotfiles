@@ -7,7 +7,7 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 
 " Syntax related bundles
 Bundle 'leshill/vim-json'
@@ -102,6 +102,9 @@ nmap <silent> <c-l> :wincmd l<CR>
 nmap <leader>f :CtrlP<CR>
 " Search from current directory instead of project root
 let g:ctrlp_working_path_mode = 0
+" Force files searched for to be open in a new buffer,
+" even if they're already open in another split
+let g:ctrlp_switch_buffer = 0
 
 map ; :
 noremap ;; ;
