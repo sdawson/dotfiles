@@ -7,7 +7,7 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'kien/ctrlp.vim'
 
 " Syntax related bundles
 Bundle 'leshill/vim-json'
@@ -35,6 +35,7 @@ set report=0
 set visualbell
 
 set incsearch
+set hlsearch
 set showmatch
 set ignorecase " searches are case insensitive
 set smartcase  " unless they contain at least one capital letter
@@ -79,11 +80,9 @@ set wildchar=<TAB>
 set wildmenu
 set wildmode=longest,full
 
-if version >= 703
-  set relativenumber
-else
-  set nu
-endif
+" set hybrid line number mode
+set nu
+set relativenumber
 
 set history=50
 set sm
@@ -99,8 +98,10 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" Command-T file list refresh
-nmap <leader>f :CommandTFlush<CR>
+" Invoke CtrlP
+nmap <leader>f :CtrlP<CR>
+" Search from current directory instead of project root
+let g:ctrlp_working_path_mode = 0
 
 map ; :
 noremap ;; ;
@@ -110,16 +111,17 @@ nnoremap ` '
 " Set leader from \ to <SPACE>
 let mapleader = " "
 
-" Toggle between relative and absolute line numbers
+" Toggle between hybrid and absolute line number modes
+" (assumes set number has previously been set)
 function! NumberToggle()
   if(&relativenumber == 1)
-    set number
+    set norelativenumber
   else
     set relativenumber
   endif
 endfunc
 
-nnoremap <C-y> :call NumberToggle()<CR>
+nnoremap <leader>y :call NumberToggle()<CR>
 
 " Highlight cols 81 and 82
 function! HighlightTooLongLines()
@@ -134,7 +136,7 @@ au BufNewFile,BufRead * call HighlightTooLongLines()
 augroup END
 
 " Remove _ to <- replacement in vim-r-plugin
-let vimrplugin_underscore = 0
+" let vimrplugin_underscore = 0
 
 " line navigation stay the same when wrapping is on
 nmap j gj
