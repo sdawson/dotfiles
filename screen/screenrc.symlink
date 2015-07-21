@@ -1,0 +1,18 @@
+startup_message off
+vbell off
+
+escape ^Tt
+
+shell -bash
+
+defutf8 on # making everything happen in UTF-8
+defscrollback 5000 # long scrollback
+defnonblock on
+#defbce on # use current bg colour for erased chars
+
+nethack on
+
+attrcolor b ".I" # allows bold colours
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' #tells screen how to set colours
+#term screen-256color-bce
+term screen-256color

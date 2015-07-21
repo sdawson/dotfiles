@@ -26,6 +26,13 @@ export GOARCH=amd64
 export GOPATH=${HOME}/dev/gocode
 export PATH=${PATH}:${GOPATH}/bin
 
+# bash history settings
+export HISTCONTROL=ignoredups:erasedups # no duped entries
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+shopt -s histappend # append to history, don't overwrite it
+# bind '"\C-t": history-search-forward'
+
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
@@ -69,6 +76,11 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias sl='ls'
   alias ll='ls -l'
   alias la='ls -al'
+fi
+
+if [[ -f ${GOROOT}/misc/bash/go ]]
+then
+  source ${GOROOT}/misc/bash/go
 fi
 
 alias givm='gvim'
