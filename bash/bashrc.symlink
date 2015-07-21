@@ -23,6 +23,8 @@ export TRANSMISSION_HOME=${HOME}/.transmission
 export GOROOT=${HOME}/dev/go
 export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
+export GOPATH=${HOME}/dev/gocode
+export PATH=${PATH}:${GOPATH}/bin
 
 unamestr=`uname`
 
@@ -49,7 +51,7 @@ elif [ "$unamestr" = "Darwin" ]; then
   export GOOS=darwin
 
   # Brew path additions
-  export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
   # ROOT path additions
   export PATH=${PATH}:${HOME}/dev/root/bin
@@ -68,8 +70,6 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias ll='ls -l'
   alias la='ls -al'
 fi
-
-source ${GOROOT}/misc/bash/go
 
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
