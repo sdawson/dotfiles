@@ -24,6 +24,13 @@ export GOROOT=${HOME}/dev/go
 export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
 
+# bash history settings
+export HISTCONTROL=ignoredups:erasedups # no duped entries
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+shopt -s histappend # append to history, don't overwrite it
+# bind '"\C-t": history-search-forward'
+
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
