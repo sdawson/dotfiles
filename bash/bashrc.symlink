@@ -23,6 +23,8 @@ export TRANSMISSION_HOME=${HOME}/.transmission
 export GOROOT=${HOME}/dev/go
 export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
+export GOPATH=${HOME}/dev/gocode
+export PATH=${PATH}:${GOPATH}/bin
 
 # bash history settings
 export HISTCONTROL=ignoredups:erasedups # no duped entries
