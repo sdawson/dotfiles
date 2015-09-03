@@ -28,6 +28,8 @@ export GOARCH=amd64
 export HISTCONTROL=ignoredups:erasedups # no duped entries
 export HISTSIZE=100000
 export HISTFILESIZE=100000
+export HISTIGNORE=clear:pwd:exit
+export HISTTIMEFORMAT="%d/%m/%y - %H:%M:%S "
 shopt -s histappend # append to history, don't overwrite it
 # bind '"\C-t": history-search-forward'
 
@@ -56,7 +58,7 @@ elif [ "$unamestr" = "Darwin" ]; then
   export GOOS=darwin
 
   # Brew path additions
-  export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
   # ROOT path additions
   export PATH=${PATH}:${HOME}/dev/root/bin
