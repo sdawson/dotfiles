@@ -22,6 +22,7 @@ Bundle 'mxw/vim-jsx'
 Bundle 'skammer/vim-css-color'
 Bundle 'tpope/vim-speeddating'
 
+" Load filetype specific indent files from .vim/indent
 filetype plugin indent on
 
 set laststatus=2
@@ -63,15 +64,15 @@ set t_Co=256
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-filetype on
-autocmd FileType make :set noexpandtab
-autocmd FileType c :set cindent
-autocmd FileType txt :set wrap
-autocmd FileType python :set textwidth=0
-autocmd FileType go :set textwidth=0
-autocmd FileType mkd :set textwidth=0
-filetype plugin indent on
-filetype plugin on
+" filetype on
+" autocmd FileType make :set noexpandtab
+" autocmd FileType c :set cindent
+" autocmd FileType txt :set wrap
+" autocmd FileType python :set textwidth=0
+" autocmd FileType go :set textwidth=0
+" autocmd FileType mkd :set textwidth=0
+" filetype plugin indent on
+" filetype plugin on
 
 set backup
 set backupdir=~/.vim/backup
