@@ -161,4 +161,4 @@ endfunction
 noremap <leader>w :call WrapToggle()<CR>
 
 " Spellcheck settings
-set spl=en_gb
+set spl=en_au
