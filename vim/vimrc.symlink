@@ -140,7 +140,7 @@ augroup END
 " Remove _ to <- replacement in vim-r-plugin
 " let vimrplugin_underscore = 0
 
-" line navigation stay the same when wrapping is on
+" Line navigation stays the same when wrapping is on
 nmap j gj
 nmap k gk
 
