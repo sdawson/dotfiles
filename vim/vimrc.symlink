@@ -162,3 +162,7 @@ noremap <leader>w :call WrapToggle()<CR>
 
 " Spellcheck settings
 set spl=en_au
+
+" Save session (will open all current windows when vim
+" is started with vim -S)
+nnoremap <leader>s :mksession<CR>
