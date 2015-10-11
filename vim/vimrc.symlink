@@ -53,6 +53,7 @@ set shiftwidth=2
 set shiftround
 
 set textwidth=79
+set wrapmargin=0
 set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
@@ -74,6 +75,7 @@ match ExtraWhitespace /\s\+$/
 " filetype plugin indent on
 " filetype plugin on
 
+set history=50
 set backup
 set backupdir=~/.vim/backup
 
@@ -84,10 +86,6 @@ set wildmode=longest,full
 " set hybrid line number mode
 set nu
 set relativenumber
-
-set history=50
-set sm
-set wm=0
 
 if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 8
