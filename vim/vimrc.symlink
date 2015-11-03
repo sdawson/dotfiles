@@ -16,6 +16,7 @@ Bundle 'sdawson/vim-markdown'
 Bundle 'vim-scripts/django.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
+Bundle 'fatih/vim-go'
 " Bundle 'vim-scripts/Vim-R-plugin'
 
 " Random
