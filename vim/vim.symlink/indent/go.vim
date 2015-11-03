@@ -20,6 +20,10 @@ setlocal autoindent
 setlocal indentexpr=GoIndent(v:lnum)
 setlocal indentkeys+=<:>,0=},0=)
 
+
+" Custom setting set by self
+setlocal textwidth=0
+
 if exists("*GoIndent")
   finish
 endif

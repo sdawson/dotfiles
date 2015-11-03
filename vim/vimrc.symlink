@@ -23,6 +23,7 @@ Bundle 'fatih/vim-go'
 Bundle 'skammer/vim-css-color'
 Bundle 'tpope/vim-speeddating'
 
+" Load filetype specific indent files from .vim/indent
 filetype plugin indent on
 
 set laststatus=2
@@ -53,6 +54,7 @@ set shiftwidth=2
 set shiftround
 
 set textwidth=79
+set wrapmargin=0
 set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
@@ -64,16 +66,17 @@ set t_Co=256
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-filetype on
-autocmd FileType make :set noexpandtab
-autocmd FileType c :set cindent
-autocmd FileType txt :set wrap
-autocmd FileType python :set textwidth=0
-autocmd FileType go :set textwidth=0
-autocmd FileType mkd :set textwidth=0
-filetype plugin indent on
-filetype plugin on
+" filetype on
+" autocmd FileType make :set noexpandtab
+" autocmd FileType c :set cindent
+" autocmd FileType txt :set wrap
+" autocmd FileType python :set textwidth=0
+" autocmd FileType go :set textwidth=0
+" autocmd FileType mkd :set textwidth=0
+" filetype plugin indent on
+" filetype plugin on
 
+set history=50
 set backup
 set backupdir=~/.vim/backup
 
@@ -84,10 +87,6 @@ set wildmode=longest,full
 " set hybrid line number mode
 set nu
 set relativenumber
-
-set history=50
-set sm
-set wm=0
 
 if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 8
@@ -142,7 +141,7 @@ augroup END
 " Remove _ to <- replacement in vim-r-plugin
 " let vimrplugin_underscore = 0
 
-" line navigation stay the same when wrapping is on
+" Line navigation stays the same when wrapping is on
 nmap j gj
 nmap k gk
 
@@ -163,4 +162,8 @@ endfunction
 noremap <leader>w :call WrapToggle()<CR>
 
 " Spellcheck settings
-set spl=en_gb
+set spl=en_au
+
+" Save session (will open all current windows when vim
+" is started with vim -S)
+nnoremap <leader>s :mksession<CR>
