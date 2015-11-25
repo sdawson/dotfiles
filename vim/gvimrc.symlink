@@ -1,4 +1,4 @@
 syntax on
-colo molokai
+colo sorcerer
 set background=dark
 set guioptions-=r

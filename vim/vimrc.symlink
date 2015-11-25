@@ -60,7 +60,7 @@ set backspace=indent,eol,start
 
 syntax on
 set background=light
-colorscheme molokai
+colorscheme sorcerer
 set t_Co=256
 
 highlight ExtraWhitespace ctermbg=red guibg=red
