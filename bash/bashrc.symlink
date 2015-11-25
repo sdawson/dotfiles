@@ -69,6 +69,10 @@ elif [ "$unamestr" = "Darwin" ]; then
   # Exports for node
   export NODE_PATH="/usr/local/lib/node"
 
+  if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+  fi
+
   if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
   fi
