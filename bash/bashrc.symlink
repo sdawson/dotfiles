@@ -25,6 +25,8 @@ export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
 export GOPATH=${HOME}/dev/gocode
 export PATH=${PATH}:${GOPATH}/bin
+# Enable go 1.5 experimental vendoring support
+export GO15VENDOREXPERIMENT=1
 
 # bash history settings
 export HISTCONTROL=ignoredups:erasedups # no duped entries
