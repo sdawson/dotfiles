@@ -60,7 +60,7 @@ set backspace=indent,eol,start
 
 syntax on
 set background=light
-colorscheme molokai
+colorscheme sorcerer
 set t_Co=256
 
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -168,3 +168,9 @@ set spl=en_au
 " Save session (will open all current windows when vim
 " is started with vim -S)
 nnoremap <leader>s :mksession<CR>
+
+" Persistent Undo
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000 " max number of changes that can be undone
+set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
