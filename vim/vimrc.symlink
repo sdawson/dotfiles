@@ -110,6 +110,7 @@ let g:ctrlp_working_path_mode = 0
 " even if they're already open in another split
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_max_files = 20000
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store'
 
 map ; :
 noremap ;; ;
