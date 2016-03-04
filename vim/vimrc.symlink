@@ -58,6 +58,10 @@ set wrapmargin=0
 set formatoptions=tcroqwn
 set backspace=indent,eol,start
 
+" When joining lines that end with '.', '?' or '!', only insert one space,
+" not two
+set nojoinspaces
+
 syntax on
 set background=light
 colorscheme sorcerer
