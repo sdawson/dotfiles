@@ -17,6 +17,7 @@ Bundle 'vim-scripts/django.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
 Bundle 'fatih/vim-go'
+Bundle 'twinside/vim-syntax-haskell-cabal'
 " Bundle 'vim-scripts/Vim-R-plugin'
 
 " Random
