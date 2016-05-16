@@ -102,6 +102,9 @@ do
   source "$config_file"
 done
 
+export NVM_DIR="${HOME}/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 # Load secret non-versioned stuff
 if [[ -f ~/.localrc ]]
 then
