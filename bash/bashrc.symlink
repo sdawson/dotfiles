@@ -79,7 +79,8 @@ elif [ "$unamestr" = "Darwin" ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
 
-  PS1='[\u@\h \W]\$ '
+  GIT_PS1_SHOWDIRTYSTATE=true
+  export PS1='[\u@\h \W$(__git_ps1)]\$ '
 
   alias sl='ls'
   alias ll='ls -l'
