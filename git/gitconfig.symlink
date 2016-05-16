@@ -20,3 +20,5 @@
   default = tracking
 [rerere]
   enabled = 1
+[alias]
+  ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %Cred%d %Creset%s'
