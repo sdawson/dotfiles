@@ -1,4 +1,4 @@
 syntax on
-colo sorcerer
+colo noether
 set background=dark
 set guioptions-=r
