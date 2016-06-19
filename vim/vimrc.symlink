@@ -69,7 +69,7 @@ syntax on
 colorscheme noether
 set t_Co=256
 
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=#aa4450
 match ExtraWhitespace /\s\+$/
 
 " filetype on
