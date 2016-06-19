@@ -5,24 +5,24 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Syntax related bundles
-Bundle 'leshill/vim-json'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'sdawson/vim-markdown'
-Bundle 'vim-scripts/django.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'mxw/vim-jsx'
-Bundle 'fatih/vim-go'
-Bundle 'twinside/vim-syntax-haskell-cabal'
-" Bundle 'vim-scripts/Vim-R-plugin'
+Plugin 'leshill/vim-json'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'sdawson/vim-markdown'
+Plugin 'vim-scripts/django.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'fatih/vim-go'
+Plugin 'twinside/vim-syntax-haskell-cabal'
+" Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
-Bundle 'skammer/vim-css-color'
-Bundle 'tpope/vim-speeddating'
+Plugin 'skammer/vim-css-color'
+Plugin 'tpope/vim-speeddating'
 
 " Load filetype specific indent files from .vim/indent
 filetype plugin indent on
