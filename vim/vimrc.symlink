@@ -43,6 +43,7 @@ set showmatch
 set ignorecase " searches are case insensitive
 set smartcase  " unless they contain at least one capital letter
 nnoremap <leader>, :noh<CR>
+set gdefault
 
 set nowrap
 set listchars+=extends:@
