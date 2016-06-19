@@ -66,8 +66,7 @@ set backspace=indent,eol,start
 set nojoinspaces
 
 syntax on
-set background=light
-colorscheme sorcerer
+colorscheme noether
 set t_Co=256
 
 highlight ExtraWhitespace ctermbg=red guibg=red
