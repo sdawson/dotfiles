@@ -171,6 +171,9 @@ endfunction
 
 noremap <leader>w :call WrapToggle()<CR>
 
+" vim-go settings
+let g:go_fmt_command = "goimports"
+
 " Spellcheck settings
 set spl=en_au
 
