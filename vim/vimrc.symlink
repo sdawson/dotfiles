@@ -68,6 +68,8 @@ set backspace=indent,eol,start
 " not two
 set nojoinspaces
 
+nnoremap <leader>v V`]
+
 syntax on
 colorscheme noether
 set t_Co=256
