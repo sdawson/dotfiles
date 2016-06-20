@@ -171,6 +171,14 @@ endfunction
 
 noremap <leader>w :call WrapToggle()<CR>
 
+function! Today()
+  let today = strftime("%A %d\/%m\/%Y")
+  exe "normal a". today
+endfunction
+command! Today :call Today()
+
+nnoremap <leader>d :Today<CR>
+
 " vim-go settings
 let g:go_fmt_command = "goimports"
 
