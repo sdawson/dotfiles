@@ -27,6 +27,9 @@ Plugin 'tpope/vim-speeddating'
 " Load filetype specific indent files from .vim/indent
 filetype plugin indent on
 
+" Set leader from \ to <SPACE>
+let mapleader = " "
+
 set laststatus=2
 set cmdheight=2
 set ruler
@@ -118,9 +121,6 @@ map ; :
 noremap ;; ;
 nnoremap ' `
 nnoremap ` '
-
-" Set leader from \ to <SPACE>
-let mapleader = " "
 
 " Toggle between hybrid and absolute line number modes
 " (assumes set number has previously been set)
