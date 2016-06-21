@@ -204,6 +204,9 @@ set spl=en_au
 " is started with vim -S)
 nnoremap <leader>s :mksession<CR>
 
+" make :W == :w
+command! W w
+
 " Persistent Undo
 set undodir=~/.vim/undodir
 set undofile
