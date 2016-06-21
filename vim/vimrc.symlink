@@ -45,7 +45,7 @@ set hlsearch
 set showmatch
 set ignorecase " searches are case insensitive
 set smartcase  " unless they contain at least one capital letter
-nnoremap <leader>, :noh<CR>
+nnoremap <leader><leader> :noh<CR>
 set gdefault
 
 set nowrap
