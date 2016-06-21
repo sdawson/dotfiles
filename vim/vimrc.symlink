@@ -161,6 +161,13 @@ augroup END
 nmap j gj
 nmap k gk
 
+" Visual shifting (does not exit visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Allow using the repeat operator with a visual selection
+vnoremap . :normal .<CR>
+
 function WrapToggle()
   if &wrap
     echo "Wrap OFF"
