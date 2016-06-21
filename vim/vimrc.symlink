@@ -109,6 +109,9 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+" Adjust splits to be the same size
+map <leader>= <c-w>=
+
 " Invoke CtrlP
 nmap <leader>f :CtrlP<CR>
 " Search from current directory instead of project root
