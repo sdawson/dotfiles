@@ -192,6 +192,8 @@ command! Today :call Today()
 
 nnoremap <leader>d :Today<CR>
 
+nnoremap <leader>r :windo e<CR>
+
 " vim-go settings
 let g:go_fmt_command = "goimports"
 
