@@ -2,8 +2,8 @@
 "
 " URL: github.com/sdawson/noether.vim
 " Author:   Sophie Dawson
-" Version: 0.0.1
-" Last Updated: 2016-05-30
+" Version: 0.0.2
+" Last Updated: 2016-06-18
 "
 " Based on the Sorcerer theme by Jeet Sukumaran, which is based on
 " the Mustang theme by Henrique C. Alves.
@@ -15,7 +15,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "blah"
+let colors_name = "noether"
 
 " GUI colour scheme
 hi Normal       guifg=#c2c2b0 guibg=#1b1d1e    gui=NONE
@@ -32,11 +32,13 @@ hi DiffDelete   guifg=#000000 guibg=#aa4450 gui=NONE
 hi DiffChange   guifg=#000000 guibg=#4f94cd gui=NONE
 hi DiffText     guifg=#000000 guibg=#8ee5ee gui=NONE
 hi Directory    guifg=#1e90ff guibg=bg      gui=NONE
+hi Error        guifg=#ffffff guibg=#ff6a6a gui=NONE
 hi ErrorMsg     guifg=#ff6a6a guibg=NONE    gui=bold
 hi FoldColumn   guifg=#68838b guibg=#4B4B4B gui=bold
 hi Folded       guifg=#406060 guibg=#232c2c gui=NONE
 hi IncSearch    guifg=#ffffff guibg=#455354 gui=bold
 hi LineNr       guifg=#bebe9f guibg=#232526 gui=NONE
+hi CursorLineNr guifg=Yellow  guibg=#0d0d0d gui=bold
 hi MatchParen   guifg=#fff000 guibg=#000000 gui=bold
 hi ModeMsg      guifg=#2e8b57 guibg=bg      gui=bold
 hi MoreMsg      guifg=#2e8b57 guibg=bg      gui=bold
