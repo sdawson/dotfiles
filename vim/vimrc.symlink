@@ -18,6 +18,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'fatih/vim-go'
 Plugin 'twinside/vim-syntax-haskell-cabal'
+Plugin 'bkad/CamelCaseMotion'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
@@ -183,6 +184,9 @@ function WrapToggle()
 endfunction
 
 noremap <leader>l :call WrapToggle()<CR>
+
+" CamelCaseMotion settings
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 function! Today()
   let today = strftime("%A %d\/%m\/%Y")
