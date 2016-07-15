@@ -182,7 +182,7 @@ function WrapToggle()
   endif
 endfunction
 
-noremap <leader>w :call WrapToggle()<CR>
+noremap <leader>l :call WrapToggle()<CR>
 
 function! Today()
   let today = strftime("%A %d\/%m\/%Y")
