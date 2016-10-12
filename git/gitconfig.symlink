@@ -22,3 +22,15 @@
   enabled = 1
 [alias]
   ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %Cred%d %Creset%s'
+  resettoremote = "!f() { git reset --hard $1 }; f"
+  rtr = "!f() { git reset --hard $1; }; f"
+  filelog = log -u # show the history of a particular file
+  fl = log -u
+  la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
+  cp = cherrypick
+  st = status # status -s for shortened status
+  cl = clone
+  co = checkout
+  br = branch
+  sp = push --force-with-lease # safe push (checks the local copy of what you're pushing is up to date with upstream before force pushing)
+  it = '!git init && git commit -m "root" --allow-empty'
