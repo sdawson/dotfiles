@@ -28,7 +28,8 @@
   fl = log -u
   la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
   cp = cherrypick
-  st = status # status -s for shortened status
+  st = status
+  shs = status -sb
   cl = clone
   co = checkout
   br = branch
