@@ -36,6 +36,8 @@ export HISTCONTROL=ignoredups:erasedups # no duped entries
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTIGNORE=clear:pwd:exit
+export HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+mkdir -p "$(dirname "$HISTFILE")"
 export HISTTIMEFORMAT="%d/%m/%y - %H:%M:%S "
 shopt -s histappend # append to history, don't overwrite it
 # bind '"\C-t": history-search-forward'
@@ -100,6 +102,7 @@ fi
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
 alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
+alias histgrep='${HOME}/.dotfiles/bash/histgrep.bash'
 alias r="$(which R) --no-save"
 
 # Load all completion files
