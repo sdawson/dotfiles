@@ -123,7 +123,7 @@ let g:ctrlp_working_path_mode = 0
 " even if they're already open in another split
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_max_files = 20000
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|reports\|flow-typed'
 if executable('ag') " Use silver searcher for listing files if available
   let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 endif
