@@ -96,6 +96,7 @@ fi
 
 alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
+alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
 alias r="$(which R) --no-save"
 
 # Load all completion files
