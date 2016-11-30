@@ -28,6 +28,9 @@ export PATH=${PATH}:${GOPATH}/bin
 # Enable go 1.5 experimental vendoring support
 export GO15VENDOREXPERIMENT=1
 
+export HOSTNAME="$(hostname)"
+export HOSTNAME_SHORT="${HOSTNAME%%.*}"
+
 # bash history settings
 export HISTCONTROL=ignoredups:erasedups # no duped entries
 export HISTSIZE=100000
