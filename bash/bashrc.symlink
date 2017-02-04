@@ -106,6 +106,7 @@ alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
 alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
 alias histgrep='${HOME}/.dotfiles/bash/histgrep.bash'
 alias r="$(which R) --no-save"
+alias mv='mv -i'
 
 # Load all completion files
 for config_file in `ls $DOT/**/completion/*`
