@@ -32,14 +32,16 @@ export HOSTNAME="$(hostname)"
 export HOSTNAME_SHORT="${HOSTNAME%%.*}"
 
 # bash history settings
-export HISTCONTROL=ignoredups:erasedups # no duped entries
-export HISTSIZE=100000
+export HISTCONTROL=ignoredups:ignorespace:erasedups # no duped entries
 export HISTFILESIZE=100000
-export HISTIGNORE=clear:pwd:exit
+export HISTSIZE=${HISTFILESIZE}
+export HISTIGNORE=clear:pwd:exit:bg:fg
 export HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
 mkdir -p "$(dirname "$HISTFILE")"
-export HISTTIMEFORMAT="%d/%m/%y - %H:%M:%S "
+export HISTTIMEFORMAT="%Y/%m/%d - %H:%M:%S "
 shopt -s histappend # append to history, don't overwrite it
+shopt -s cmdhist # try to save all lines of a multiple-line command in the same history entry
+shopt -s lithist # save multi-line commands to the history with embedded newlines
 # bind '"\C-t": history-search-forward'
 
 unamestr=`uname`
