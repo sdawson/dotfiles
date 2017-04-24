@@ -44,6 +44,12 @@ shopt -s cmdhist # try to save all lines of a multiple-line command in the same 
 shopt -s lithist # save multi-line commands to the history with embedded newlines
 # bind '"\C-t": history-search-forward'
 
+# hstr settings
+export HH_CONFIG=hicolor         # get more colors
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
+
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
