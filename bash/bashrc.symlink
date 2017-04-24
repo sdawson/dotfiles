@@ -111,6 +111,7 @@ alias givm='gvim'
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
 alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
 alias histgrep='${HOME}/.dotfiles/bash/histgrep.bash'
+alias fzfhist='${HOME}/.dotfiles/bash/fzfhist.bash'
 alias r="$(which R) --no-save"
 alias mv='mv -i'
 
@@ -122,6 +123,8 @@ done
 
 export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Load secret non-versioned stuff
 if [[ -f ~/.localrc ]]
