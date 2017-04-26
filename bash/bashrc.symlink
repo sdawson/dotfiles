@@ -44,6 +44,9 @@ shopt -s cmdhist # try to save all lines of a multiple-line command in the same 
 shopt -s lithist # save multi-line commands to the history with embedded newlines
 # bind '"\C-t": history-search-forward'
 
+# fzf settings
+export FZF_DEFAULT_OPTS='--no-height'
+
 # hstr settings
 export HH_CONFIG=hicolor         # get more colors
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
