@@ -21,7 +21,7 @@
 [rerere]
   enabled = 1
 [alias]
-  ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %Cred%d %Creset%s'
+  ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'
   resettoremote = "!f() { git reset --hard $1 }; f"
   rtr = "!f() { git reset --hard $1; }; f"
   filelog = log -u # show the history of a particular file
