@@ -111,12 +111,16 @@ then
 fi
 
 alias givm='gvim'
-alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
-alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
 alias histgrep='${HOME}/.dotfiles/bash/histgrep.bash'
 alias fzfhist='${HOME}/.dotfiles/bash/fzfhist.bash'
+alias gls='${HOME}/bin/gitlogsince.sh'
 alias r="$(which R) --no-save"
 alias mv='mv -i'
+
+# git shortcuts
+alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
+alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
+# alias gl="git log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'"
 
 # Load all completion files
 for config_file in `ls $DOT/**/completion/*`
