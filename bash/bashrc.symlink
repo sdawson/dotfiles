@@ -97,6 +97,10 @@ elif [ "$unamestr" = "Darwin" ]; then
     fi
   fi
 
+  if [ -f ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
+  fi
+
   GIT_PS1_SHOWDIRTYSTATE=true
   export PS1='[\u@\h \W$(__git_ps1)]\$ '
 
