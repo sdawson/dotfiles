@@ -118,6 +118,7 @@ alias givm='gvim'
 alias histgrep="${HOME}/.dotfiles/bash/histgrep.bash"
 alias fzfhist="${HOME}/.dotfiles/bash/fzfhist.bash"
 alias dockerclean="${HOME}/.dotfiles/bash/docker_clean.bash"
+alias timehelp="${HOME}/.dotfiles/bash/timestamp_help.bash"
 alias gls="${HOME}/bin/gitlogsince.sh"
 alias r="$(which R) --no-save"
 alias mv='mv -i'
