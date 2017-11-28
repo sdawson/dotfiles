@@ -21,6 +21,7 @@ Plugin 'othree/html5.vim'
 Plugin 'fatih/vim-go'
 Plugin 'twinside/vim-syntax-haskell-cabal'
 Plugin 'bkad/CamelCaseMotion'
+Plugin 'ConradIrwin/vim-bracketed-paste'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
@@ -114,6 +115,8 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 " Adjust splits to be the same size
 map <leader>= <c-w>=
+" Max out the height of a split (e.g. wmii)
+map <leader>- <c-w>_
 
 " Invoke CtrlP
 nmap <leader>f :CtrlP<CR>
