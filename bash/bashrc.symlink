@@ -122,6 +122,7 @@ alias timehelp="${HOME}/.dotfiles/bash/timestamp_help.bash"
 alias gls="${HOME}/bin/gitlogsince.sh"
 alias r="$(which R) --no-save"
 alias mv='mv -i'
+alias gdw="git diff --color-words"
 
 # git shortcuts
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
