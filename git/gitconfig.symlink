@@ -38,3 +38,4 @@
   wd = diff --word-diff # diff on words for viewing prose diffs
   upstream = log --oneline --no-merges HEAD..origin/master # see what's happened at origin/master since you last pulled onto the current branch
   graph = log --graph --all --decorate --stat --date=iso # more complex git log
+  ap = add --patch
