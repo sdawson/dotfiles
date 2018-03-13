@@ -22,6 +22,7 @@ Plugin 'fatih/vim-go'
 Plugin 'twinside/vim-syntax-haskell-cabal'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'ConradIrwin/vim-bracketed-paste'
+Plugin 'tpope/vim-abolish'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
