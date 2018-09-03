@@ -19,6 +19,9 @@ export COLUMNS
 
 export TRANSMISSION_HOME=${HOME}/.transmission
 
+# turn off history expansion
+set +H
+
 # PATH additions and env vars for Go
 export GOROOT=${HOME}/dev/go
 export PATH=${PATH}:${GOROOT}/bin
