@@ -24,6 +24,7 @@ Plugin 'bkad/CamelCaseMotion'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'tpope/vim-abolish'
 Plugin 'bronson/vim-visual-star-search'
+Plugin 'leafgarland/typescript-vim'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
