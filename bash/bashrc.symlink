@@ -89,6 +89,9 @@ elif [ "$unamestr" = "Darwin" ]; then
   # Exports for node
   export NODE_PATH="/usr/local/lib/node"
 
+  # path fixes for homebrew git
+  export PATH=/usr/local/opt/gettext/bin:${PATH}
+
   if hash rbenv 2>/dev/null; then
     eval "$(rbenv init -)"
   fi
