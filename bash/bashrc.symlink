@@ -24,7 +24,6 @@ set +H
 
 # PATH additions and env vars for Go
 export GOROOT=${HOME}/dev/go
-export PATH=${PATH}:${GOROOT}/bin
 export GOARCH=amd64
 export GOPATH=${HOME}/dev/gocode
 export PATH=${PATH}:${GOPATH}/bin
