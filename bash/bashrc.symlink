@@ -154,6 +154,14 @@ export NVM_DIR="${HOME}/.nvm"
 #   ag --nocolor -G "_${HOSTNAME_SHORT}_" --nonumbers --nofilename --nobreak $HOME/.history | sort | uniq -c | sort | fzf +s --tac +m -n1..,.. --tiebreak=index --toggle-sort=ctrl-r
 # }
 
+# usage:
+# if command_exists mvim; then
+#   export BLAH="mvim --no-fork"
+# fi
+command_exists () {
+  command -v "$1" > /dev/null 2>&1;
+}
+
 # Load secret non-versioned stuff
 if [[ -f ~/.localrc ]]
 then
