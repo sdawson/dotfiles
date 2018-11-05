@@ -177,6 +177,10 @@ vnoremap > >gv
 " Allow using the repeat operator with a visual selection
 vnoremap . :normal .<CR>
 
+" Easier horizontal scrolling
+map zl zL
+map zh zH
+
 function WrapToggle()
   if &wrap
     echo "Wrap OFF"
