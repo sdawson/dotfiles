@@ -107,9 +107,9 @@ elif [ "$unamestr" = "Darwin" ]; then
   GIT_PS1_SHOWDIRTYSTATE=true
   export PS1='[\u@\h \W$(__git_ps1)]\$ '
 
-  alias sl='ls'
-  alias ll='ls -l'
-  alias la='ls -al'
+  alias sl='ls -G'
+  alias ll='ls -Gl'
+  alias la='ls -Gal'
 fi
 
 if [[ -f ${GOROOT}/misc/bash/go ]]
