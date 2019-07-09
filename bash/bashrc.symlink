@@ -165,7 +165,7 @@ export NVM_DIR="${HOME}/.nvm"
 # if command_exists mvim; then
 #   export BLAH="mvim --no-fork"
 # fi
-command_exists () {
+command_exists() {
   command -v "$1" > /dev/null 2>&1;
 }
 
