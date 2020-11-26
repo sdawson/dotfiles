@@ -105,6 +105,8 @@ set wildmode=longest,full
 " set hybrid line number mode
 set nu
 set relativenumber
+set cursorline
+set cursorlineopt=number
 
 if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 8
