@@ -337,7 +337,7 @@
   "Disable Smcup Rmcup" : false,
   "Name" : "Default",
   "Blinking Cursor" : false,
-  "Guid" : "02BEB798-3C02-46D0-A33C-E4E8118C91DF",
+  "Guid" : "09A3B9D8-DFA1-4408-ACA0-13C87ABD6B36",
   "Ansi 1 Color" : {
     "Green Component" : 0,
     "Red Component" : 0.7333333,
@@ -769,7 +769,7 @@
   "Disable Smcup Rmcup" : false,
   "Name" : "first",
   "Blinking Cursor" : false,
-  "Guid" : "B9C8AF86-0F77-4F88-8FA1-E4D6EAFAF316",
+  "Guid" : "C098C241-EC0D-40B8-9CD6-BAED3E05F3A9",
   "Ansi 1 Color" : {
     "Green Component" : 0.2466028034687042,
     "Blue Component" : 0.3802132308483124,
