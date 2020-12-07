@@ -22,12 +22,6 @@ export TRANSMISSION_HOME=${HOME}/.transmission
 # turn off history expansion
 set +H
 
-# PATH additions and env vars for Go
-export GOROOT=${HOME}/dev/go
-export GOARCH=amd64
-export GOPATH=${HOME}/dev/gocode
-export PATH=${PATH}:${GOPATH}/bin
-
 export HOSTNAME="$(hostname)"
 export HOSTNAME_SHORT="${HOSTNAME%%.*}"
 
