@@ -56,6 +56,9 @@ task :uninstall do
       FileUtils.rm(target)
     end
     
+    # Remove karabiner config manual symlink
+    remove_karabiner_config
+
     # Replace any backups made during installation
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
       `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
@@ -72,6 +75,29 @@ def install_vundle
   `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
   puts "Installing vundle plugins"
   `vim +BundleInstall +qall`
+end
+
+task :karabiner do
+  config_dir = "mac/karabiner_elements/karabiner"
+  target = "#{ENV["HOME"]}/.config"
+
+  `mkdir -p #{target}`
+
+  `ln -s "$PWD/#{config_dir}" #{target}`
+
+  user_id = `id -u`
+  `launchctl kickstart -k "gui/#{user_id}/org.pqrs.karabiner.karabiner_console_user_server"`
+end
+
+task :karabiner_uninstall do
+  remove_karabiner_config
+end
+
+def remove_karabiner_config
+  karabiner_config = "#{ENV["HOME"]}/.config/karabiner"
+  if File.symlink?(karabiner_config)
+    FileUtils.rm(karabiner_config)
+  end
 end
 
 task :default => 'install'
