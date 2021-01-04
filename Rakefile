@@ -6,10 +6,7 @@ task :install do
 
   create_links linkables
 
-  puts "Installing vundle..."
-  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
-  puts "Installing vundle plugins"
-  `vim +BundleInstall +qall`
+  install_vundle
 end
 
 task :vim_install do
@@ -50,9 +47,7 @@ def create_links linkables
 end
 
 task :uninstall do
-
   Dir.glob('**/*.symlink').each do |linkable|
-
     file = linkable.split('/').last.split('.symlink').last
     target = "#{ENV["HOME"]}/.#{file}"
 
@@ -65,11 +60,14 @@ task :uninstall do
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
       `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
     end
-
   end
 end
 
 task :vundle do
+  install_vundle
+end
+
+def install_vundle
   puts "Installing vundle..."
   `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
   puts "Installing vundle plugins"
