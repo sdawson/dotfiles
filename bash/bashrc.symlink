@@ -94,11 +94,6 @@ elif [ "$unamestr" = "Darwin" ]; then
     fi
   fi
 
-  # MacVim settings
-  if [ -d /Applications/MacVim.app ]; then
-    export PATH=${PATH}:/Applications/MacVim.app/Contents/bin
-  fi
-
   if [ -f ~/.git-prompt.sh ]; then
     source ~/.git-prompt.sh
   fi
