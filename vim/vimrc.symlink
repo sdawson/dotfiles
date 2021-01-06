@@ -93,6 +93,8 @@ nnoremap <leader>r :windo e<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 nmap <leader>c <Plug>(Scalpel)
 
+let g:camelcasemotion_key='<leader>'
+
 syntax on
 colorscheme noether
 set t_Co=256
@@ -199,10 +201,6 @@ function WrapToggle()
     setlocal wrapmargin=0
   endif
 endfunction
-
-
-" CamelCaseMotion settings
-call camelcasemotion#CreateMotionMappings('<leader>')
 
 function! Today()
   let today = strftime("%A %d\/%m\/%Y")
