@@ -23,6 +23,7 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'tpope/vim-abolish'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'mbbill/undotree'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
@@ -88,6 +89,7 @@ nnoremap <leader>y :call NumberToggle()<CR>
 noremap <leader>l :call WrapToggle()<CR>
 nnoremap <leader>d :Today<CR>
 nnoremap <leader>r :windo e<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
 syntax on
 colorscheme noether
@@ -216,7 +218,12 @@ set spl=en_au
 command! W w
 
 " Persistent Undo
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=1000 " max number of changes that can be undone
-set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
+if has("persistent_undo")
+  set undodir=~/.vim/undodir
+  set undofile
+  set undolevels=1000 " max number of changes that can be undone
+  set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
+end
+
+" undotree settings
+let g:undotree_WindowLayout=2
