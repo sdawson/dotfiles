@@ -177,7 +177,7 @@ au BufNewFile,BufRead * call HighlightTooLongLines()
 augroup END
 
 " Remove _ to <- replacement in vim-r-plugin
-" let vimrplugin_underscore = 0
+" let vimrplugin_underscore=0
 
 " Line navigation stays the same when wrapping is on
 nmap j gj
@@ -209,13 +209,13 @@ function WrapToggle()
 endfunction
 
 function! Today()
-  let today = strftime("%A %d\/%m\/%Y")
+  let today=strftime("%A %d\/%m\/%Y")
   exe "normal a". today
 endfunction
 command! Today :call Today()
 
 " vim-go settings
-let g:go_template_autocreate = 0
+let g:go_template_autocreate=0
 
 " Spellcheck settings
 set spl=en_au
