@@ -32,9 +32,6 @@ Plugin 'tpope/vim-speeddating'
 " Load filetype specific indent files from .vim/indent
 filetype plugin indent on
 
-" Set leader from \ to <SPACE>
-let mapleader = " "
-
 set laststatus=2
 set cmdheight=2
 set ruler
@@ -50,7 +47,6 @@ set hlsearch
 set showmatch
 set ignorecase " searches are case insensitive
 set smartcase  " unless they contain at least one capital letter
-nnoremap <leader><leader> :noh<CR>
 set gdefault
 
 set nowrap
@@ -73,7 +69,25 @@ set backspace=indent,eol,start
 " not two
 set nojoinspaces
 
+" Leader commands
+
+" Set leader from \ to <SPACE>
+let mapleader="\<Space>"
+nnoremap <leader><leader> :noh<CR>
+" Highlight text that was last pasted
 nnoremap <leader>v V`]
+" Adjust splits to be the same size
+map <leader>= <c-w>=
+" Max out the height of a split (e.g. wmii)
+map <leader>- <c-w>_
+" Save session (will open all current windows when vim is started with vim -S)
+nnoremap <leader>s :mksession<CR>
+" Invoke CtrlP
+nmap <leader>f :CtrlP<CR>
+nnoremap <leader>y :call NumberToggle()<CR>
+noremap <leader>l :call WrapToggle()<CR>
+nnoremap <leader>d :Today<CR>
+nnoremap <leader>r :windo e<CR>
 
 syntax on
 colorscheme noether
@@ -112,13 +126,6 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" Adjust splits to be the same size
-map <leader>= <c-w>=
-" Max out the height of a split (e.g. wmii)
-map <leader>- <c-w>_
-
-" Invoke CtrlP
-nmap <leader>f :CtrlP<CR>
 " Search from current directory instead of project root
 let g:ctrlp_working_path_mode = 0
 " Force files searched for to be open in a new buffer,
@@ -144,8 +151,6 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
-
-nnoremap <leader>y :call NumberToggle()<CR>
 
 " Highlight cols 81 and 82
 function! HighlightTooLongLines()
@@ -191,7 +196,6 @@ function WrapToggle()
   endif
 endfunction
 
-noremap <leader>l :call WrapToggle()<CR>
 
 " CamelCaseMotion settings
 call camelcasemotion#CreateMotionMappings('<leader>')
@@ -202,19 +206,11 @@ function! Today()
 endfunction
 command! Today :call Today()
 
-nnoremap <leader>d :Today<CR>
-
-nnoremap <leader>r :windo e<CR>
-
 " vim-go settings
 let g:go_template_autocreate = 0
 
 " Spellcheck settings
 set spl=en_au
-
-" Save session (will open all current windows when vim
-" is started with vim -S)
-nnoremap <leader>s :mksession<CR>
 
 " make :W == :w
 command! W w
