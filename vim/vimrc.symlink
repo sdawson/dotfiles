@@ -24,6 +24,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
+Plugin 'wincent/scalpel'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
@@ -90,6 +91,7 @@ noremap <leader>l :call WrapToggle()<CR>
 nnoremap <leader>d :Today<CR>
 nnoremap <leader>r :windo e<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
+nmap <leader>c <Plug>(Scalpel)
 
 syntax on
 colorscheme noether
