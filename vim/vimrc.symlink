@@ -8,8 +8,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 Plugin 'ctrlpvim/ctrlp.vim'
-
-" Syntax related bundles
 Plugin 'leshill/vim-json'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'sdawson/vim-markdown'
