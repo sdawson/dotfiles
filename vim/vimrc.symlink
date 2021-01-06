@@ -122,7 +122,9 @@ set wildmode=longest,full
 
 " set hybrid line number mode
 set nu
-set relativenumber
+if exists('+relativenumber')
+  set relativenumber
+end
 set cursorline
 set cursorlineopt=number
 
@@ -151,12 +153,14 @@ nnoremap ` '
 " Toggle between hybrid and absolute line number modes
 " (assumes set number has previously been set)
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
+  if exists('+relativenumber')
+    if(&relativenumber == 1)
+      set norelativenumber
+    else
+      set relativenumber
+    endif
+  end
+endfunction
 
 " Highlight cols 81 and 82
 function! HighlightTooLongLines()
