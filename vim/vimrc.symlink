@@ -233,3 +233,9 @@ end
 
 " undotree settings
 let g:undotree_WindowLayout=2
+
+if has('folding')
+  if has('windows')
+    set fillchars=vert:┃
+  endif
+endif
