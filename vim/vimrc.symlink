@@ -102,16 +102,6 @@ set t_Co=256
 highlight ExtraWhitespace ctermbg=red guibg=#aa4450
 match ExtraWhitespace /\s\+$/
 
-" filetype on
-" autocmd FileType make :set noexpandtab
-" autocmd FileType c :set cindent
-" autocmd FileType txt :set wrap
-" autocmd FileType python :set textwidth=0
-" autocmd FileType go :set textwidth=0
-" autocmd FileType mkd :set textwidth=0
-" filetype plugin indent on
-" filetype plugin on
-
 set history=50
 set backup
 set backupdir=~/.vim/backup
