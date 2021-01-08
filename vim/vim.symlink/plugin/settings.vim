@@ -43,6 +43,10 @@ else
   set backupdir=~/.vim/backup
 endif
 
+if exists('$SUDO_USER')
+  set noswapfile
+endif
+
 set wildchar=<TAB>
 set wildmenu
 set wildmode=longest,full
