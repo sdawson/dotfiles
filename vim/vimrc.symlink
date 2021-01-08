@@ -35,28 +35,8 @@ Plugin 'tpope/vim-speeddating'
 " Load filetype specific indent files from .vim/indent
 filetype plugin indent on
 
-" Leader commands
-
 " Set leader from \ to <SPACE>
 let mapleader="\<Space>"
-nnoremap <leader><leader> :noh<CR>
-" Highlight text that was last pasted
-nnoremap <leader>v V`]
-" Adjust splits to be the same size
-map <leader>= <c-w>=
-" Max out the height of a split (e.g. wmii)
-map <leader>- <c-w>_
-" Save session (will open all current windows when vim is started with vim -S)
-nnoremap <leader>s :mksession<CR>
-" Invoke CtrlP
-nmap <leader>f :CtrlP<CR>
-nnoremap <leader>y :call sophied#functions#NumberToggle()<CR>
-noremap <leader>l :call sophied#functions#WrapToggle()<CR>
-nnoremap <leader>d :call sophied#functions#Today()<CR>
-nnoremap <leader>r :windo e<CR>
-nnoremap <leader>u :UndotreeToggle<CR>
-nmap <leader>c <Plug>(Scalpel)
-nnoremap <leader>o :only<CR>
 
 let g:camelcasemotion_key='<leader>'
 
