@@ -59,7 +59,7 @@ set wildmode=longest,full
 set number
 if exists('+relativenumber')
   set relativenumber
-end
+endif
 set cursorline
 set cursorlineopt=number
 
@@ -72,7 +72,7 @@ if has("persistent_undo")
   set undofile
   set undolevels=1000 " max number of changes that can be undone
   set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
-end
+endif
 
 if has('folding')
   if has('windows')
