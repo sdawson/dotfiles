@@ -93,6 +93,7 @@ nnoremap <leader>d :call sophied#functions#Today()<CR>
 nnoremap <leader>r :windo e<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 nmap <leader>c <Plug>(Scalpel)
+nnoremap <leader>o :only<CR>
 
 let g:camelcasemotion_key='<leader>'
 
