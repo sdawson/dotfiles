@@ -24,6 +24,11 @@ Plug 'pbrisbin/vim-mkdir'
 " Plug 'vim-scripts/Vim-R-plugin'
 Plug 'skammer/vim-css-color'
 Plug 'tpope/vim-speeddating'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'glts/vim-textobj-comment'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 endif
