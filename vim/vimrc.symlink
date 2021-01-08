@@ -83,13 +83,6 @@ augroup END
 nmap j gj
 nmap k gk
 
-" Visual shifting (does not exit visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
-" Allow using the repeat operator with a visual selection
-vnoremap . :normal .<CR>
-
 " Easier horizontal scrolling
 map zl zL
 map zh zH
@@ -102,4 +95,3 @@ command! W w
 
 " undotree settings
 let g:undotree_WindowLayout=2
-
