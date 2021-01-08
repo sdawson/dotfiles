@@ -6,7 +6,7 @@ task :install do
 
   create_links linkables
 
-  install_vundle
+  install_vim_plug
 end
 
 task :vim_install do
@@ -63,18 +63,26 @@ task :uninstall do
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
       `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
     end
+
+    remove_vim_plug
   end
 end
 
-task :vundle do
-  install_vundle
+task :vim_plug do
+  install_vim_plug
 end
 
-def install_vundle
-  puts "Installing vundle..."
-  `git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
-  puts "Installing vundle plugins"
-  `vim +BundleInstall +qall`
+def install_vim_plug
+  puts "Installing vim-plug..."
+  `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+  puts "vim-plug installed"
+end
+
+def remove_vim_plug
+  vim_plug_vimfile = "#{ENV["HOME"]}/.vim/autoload/plug.vim"
+  if File.exists?(vim_plug_vimfile)
+    FileUtils.rm(vim_plug_vimfile)
+  end
 end
 
 task :karabiner do

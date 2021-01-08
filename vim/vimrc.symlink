@@ -1,46 +1,40 @@
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+silent! if plug#begin('~/.vim/plugged')
 
-" Let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'leshill/vim-json'
+Plug 'kchmck/vim-coffee-script'
+Plug 'sdawson/vim-markdown'
+Plug 'vim-scripts/django.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'othree/html5.vim'
+if v:version >= 800
+  Plug 'fatih/vim-go'
+endif
+Plug 'twinside/vim-syntax-haskell-cabal'
+Plug 'bkad/CamelCaseMotion'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'tpope/vim-abolish'
+Plug 'bronson/vim-visual-star-search'
+Plug 'leafgarland/typescript-vim'
+Plug 'mbbill/undotree'
+Plug 'wincent/scalpel'
+Plug 'pbrisbin/vim-mkdir'
+" Plug 'vim-scripts/Vim-R-plugin'
+Plug 'skammer/vim-css-color'
+Plug 'tpope/vim-speeddating'
 
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'leshill/vim-json'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'sdawson/vim-markdown'
-Plugin 'vim-scripts/django.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'othree/html5.vim'
-Plugin 'fatih/vim-go'
-Plugin 'twinside/vim-syntax-haskell-cabal'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'tpope/vim-abolish'
-Plugin 'bronson/vim-visual-star-search'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mbbill/undotree'
-Plugin 'wincent/scalpel'
-Plugin 'pbrisbin/vim-mkdir'
-" Plugin 'vim-scripts/Vim-R-plugin'
-
-" Random
-Plugin 'skammer/vim-css-color'
-Plugin 'tpope/vim-speeddating'
-
-" Load filetype specific indent files from .vim/indent
-filetype plugin indent on
+call plug#end()
+endif
 
 " Set leader from \ to <SPACE>
 let mapleader="\<Space>"
 
 let g:camelcasemotion_key='<leader>'
 
-syntax on
 colorscheme noether
 set t_Co=256
 
