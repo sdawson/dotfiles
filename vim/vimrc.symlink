@@ -25,6 +25,7 @@ Plugin 'bronson/vim-visual-star-search'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
 Plugin 'wincent/scalpel'
+Plugin 'pbrisbin/vim-mkdir'
 " Plugin 'vim-scripts/Vim-R-plugin'
 
 " Random
