@@ -36,6 +36,8 @@ endif
 " Set leader from \ to <SPACE>
 let mapleader="\<Space>"
 
+runtime macros/matchit.vim
+
 let g:camelcasemotion_key='<leader>'
 
 colorscheme noether
