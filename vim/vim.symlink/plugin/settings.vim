@@ -68,10 +68,14 @@ set spelllang=en_au
 
 " Persistent Undo
 if has("persistent_undo")
-  set undodir=~/.vim/undodir
-  set undofile
-  set undolevels=1000 " max number of changes that can be undone
-  set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
+  if exists('$SUDO_USER')
+    set noundofile
+  else
+    set undodir=~/.vim/undodir
+    set undofile
+    set undolevels=1000 " max number of changes that can be undone
+    set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
+  endif
 endif
 
 if has('folding')
