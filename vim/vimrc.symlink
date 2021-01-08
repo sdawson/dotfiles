@@ -86,9 +86,9 @@ map <leader>- <c-w>_
 nnoremap <leader>s :mksession<CR>
 " Invoke CtrlP
 nmap <leader>f :CtrlP<CR>
-nnoremap <leader>y :call NumberToggle()<CR>
-noremap <leader>l :call WrapToggle()<CR>
-nnoremap <leader>d :Today<CR>
+nnoremap <leader>y :call sophied#functions#NumberToggle()<CR>
+noremap <leader>l :call sophied#functions#WrapToggle()<CR>
+nnoremap <leader>d :call sophied#functions#Today()<CR>
 nnoremap <leader>r :windo e<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 nmap <leader>c <Plug>(Scalpel)
@@ -142,28 +142,9 @@ noremap ;; ;
 nnoremap ' `
 nnoremap ` '
 
-" Toggle between hybrid and absolute line number modes
-" (assumes set number has previously been set)
-function! NumberToggle()
-  if exists('+relativenumber')
-    if(&relativenumber == 1)
-      set norelativenumber
-    else
-      set relativenumber
-    endif
-  end
-endfunction
-
-" Highlight cols 81 and 82
-function! HighlightTooLongLines()
-  highlight def link RightMargin Error
-  if &textwidth != 0
-    exec 'match RightMargin /\%<' . (&textwidth + 3) . 'v.\%>' . (&textwidth + 1) . 'v/'
-  endif
-endfunction
-
-augroup filetypedetect
-au BufNewFile,BufRead * call HighlightTooLongLines()
+augroup highlightlonglines
+  autocmd!
+  autocmd BufNewFile,BufRead * call sophied#functions#HighlightTooLongLines()
 augroup END
 
 " Remove _ to <- replacement in vim-r-plugin
@@ -183,26 +164,6 @@ vnoremap . :normal .<CR>
 " Easier horizontal scrolling
 map zl zL
 map zh zH
-
-function WrapToggle()
-  if &wrap
-    echo "Wrap OFF"
-    setlocal nowrap
-    set virtualedit=all
-  else
-    echo "Wrap ON"
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal textwidth=0
-    setlocal wrapmargin=0
-  endif
-endfunction
-
-function! Today()
-  let today=strftime("%A %d\/%m\/%Y")
-  exe "normal a". today
-endfunction
-command! Today :call Today()
 
 " vim-go settings
 let g:go_template_autocreate=0
