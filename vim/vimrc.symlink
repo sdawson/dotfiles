@@ -47,12 +47,6 @@ set t_Co=256
 highlight ExtraWhitespace ctermbg=red guibg=#aa4450
 match ExtraWhitespace /\s\+$/
 
-" Faster split movements
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-
 " CtrlP Settings
 
 " Search from current directory instead of project root
@@ -66,11 +60,6 @@ if executable('ag') " Use silver searcher for listing files if available
   let g:ctrlp_user_command='ag %s -l --hidden --nocolor -g ""'
 endif
 
-map ; :
-noremap ;; ;
-nnoremap ' `
-nnoremap ` '
-
 augroup highlightlonglines
   autocmd!
   autocmd BufNewFile,BufRead * call sophied#functions#HighlightTooLongLines()
@@ -78,14 +67,6 @@ augroup END
 
 " Remove _ to <- replacement in vim-r-plugin
 " let vimrplugin_underscore=0
-
-" Line navigation stays the same when wrapping is on
-nmap j gj
-nmap k gk
-
-" Easier horizontal scrolling
-map zl zL
-map zh zH
 
 " vim-go settings
 let g:go_template_autocreate=0
