@@ -47,6 +47,10 @@ if exists('$SUDO_USER')
   set noswapfile
 endif
 
+if v:version > 703
+  set formatoptions+=j
+endif
+
 set wildchar=<TAB>
 set wildmenu
 set wildmode=longest,full
