@@ -35,8 +35,13 @@ set backspace=indent,eol,start
 set nojoinspaces
 
 set history=50
-set backup
-set backupdir=~/.vim/backup
+if exists('$SUDO_USER')
+  set nobackup
+  set nowritebackup
+else
+  set backup
+  set backupdir=~/.vim/backup
+endif
 
 set wildchar=<TAB>
 set wildmenu
