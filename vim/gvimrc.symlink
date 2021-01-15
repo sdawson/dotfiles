@@ -8,5 +8,5 @@ set guioptions-=L
 
 if has('gui_macvim')
   set macligatures " enable ligatures
-  set guifont=MonoLisa-Regular:h12
+  set guifont=MonoLisa-Regular:h11
 end
