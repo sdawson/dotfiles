@@ -30,6 +30,7 @@ Plug 'glts/vim-textobj-comment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-after-object'
 
 call plug#end()
 endif
