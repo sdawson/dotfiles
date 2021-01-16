@@ -29,6 +29,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'glts/vim-textobj-comment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 endif

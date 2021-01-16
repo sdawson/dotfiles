@@ -4,3 +4,5 @@ xnoremap > >gv
 
 " Allow using the repeat operator with a visual selection
 xnoremap . :normal .<CR>
+
+xmap ga <Plug>(EasyAlign)
