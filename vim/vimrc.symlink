@@ -37,6 +37,7 @@ endif
 
 " Set leader from \ to <SPACE>
 let mapleader="\<Space>"
+let maplocalleader="\\"
 
 runtime macros/matchit.vim
 
