@@ -15,9 +15,6 @@ set ignorecase " searches are case insensitive
 set smartcase  " unless they contain at least one capital letter
 set gdefault
 
-set nowrap
-set listchars+=extends:@
-
 set autoindent
 set tabstop=2
 set expandtab
@@ -26,6 +23,8 @@ set copyindent
 set shiftwidth=2
 set shiftround
 
+set nowrap
+set listchars+=extends:@
 set textwidth=79
 set wrapmargin=0
 set formatoptions=tcroqwn
