@@ -35,3 +35,17 @@ nnoremap <leader>c <Plug>(Scalpel)
 
 " <leader>o: Close all windows except the current one
 nnoremap <leader>o :only<CR>
+
+" <leader>f: Open last buffer
+nnoremap <leader>f <C-^>
+
+" <leader>p: Show the path of the current file (for when you're in
+" a split that's too small to see the file path in the status line)
+nnoremap <leader>p :echo expand('%')<CR>
+
+" <localleader>h: Fix syntax highlighting issues in the current buffer
+nnoremap <silent> <localleader>s :syntax sync fromstart<CR>
+
+" <localleader>e: Edit file, starting from the same directory as the current
+" file
+nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
