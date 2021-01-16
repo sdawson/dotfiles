@@ -1,1 +1,1 @@
-setlocal textwidth=0
+call sophied#functions#Plaintext()
