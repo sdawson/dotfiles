@@ -156,7 +156,7 @@ then
 fi
 
 # Load secret non-versioned stuff
-if [[ -f ~/.localrc ]]
+if [ -f ~/.localrc ]
 then
   source ~/.localrc
 fi
