@@ -50,7 +50,6 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
-  export GOOS=linux
   export TERMINAL=xterm
   alias unison='unison-gtk2'
 
@@ -69,8 +68,6 @@ if [ "$unamestr" = "Linux" ]; then
   # Lang (locale info) for anki software
   export LANG=en_AU.UTF-8
 elif [ "$unamestr" = "Darwin" ]; then
-  export GOOS=darwin
-
   # Brew path additions
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
@@ -104,11 +101,6 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias sl='ls -G'
   alias ll='ls -Gl'
   alias la='ls -Gal'
-fi
-
-if [[ -f ${GOROOT}/misc/bash/go ]]
-then
-  source ${GOROOT}/misc/bash/go
 fi
 
 alias givm='gvim'
