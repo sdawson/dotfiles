@@ -31,6 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-after-object'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 endif
