@@ -33,6 +33,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-after-object'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+Plug 'jparise/vim-graphql'
 
 call plug#end()
 endif
