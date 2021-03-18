@@ -59,6 +59,7 @@ if [ "$unamestr" = "Linux" ]; then
   alias sl='ls --color=auto'
   alias ll='ls --color=auto -l'
   alias la='ls --color=auto -al'
+  alias lh='la --color=auth -cth'
 
   #@$(ruby -rubygems -e "puts Gem.user_dir")/bin
 
@@ -102,6 +103,7 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias sl='ls -G'
   alias ll='ls -Gl'
   alias la='ls -Gal'
+  alias lh='la -cth'
 fi
 
 alias givm='gvim'
