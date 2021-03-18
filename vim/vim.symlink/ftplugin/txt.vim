@@ -1,1 +1,1 @@
-setlocal wrap
+call sophied#functions#Plaintext()
