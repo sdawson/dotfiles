@@ -82,7 +82,7 @@ elif [ "$unamestr" = "Darwin" ]; then
   # path fixes for homebrew git
   export PATH=/usr/local/opt/gettext/bin:${PATH}
 
-  if hash rbenv 2>/dev/null; then
+  if command_exists rbenv; then
     eval "$(rbenv init -)"
   fi
 
