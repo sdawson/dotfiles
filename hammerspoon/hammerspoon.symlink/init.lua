@@ -17,6 +17,7 @@ end
 -- lg.i(hs.screen.screenPositions())
 
 hs.hints.style = "vimperator"
+hs.hints.showTitleThresh = 30
 hs.hotkey.bind({"cmd"}, "E", function()
   hs.hints.windowHints()
 end)
