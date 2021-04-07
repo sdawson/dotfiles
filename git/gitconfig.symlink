@@ -23,6 +23,7 @@
 [rerere]
   enabled = 1
 [alias]
+  ls = log --pretty=oneline
   ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'
   resettoremote = "!f() { git reset --hard $1 }; f"
   rtr = "!f() { git reset --hard $1; }; f"
@@ -30,6 +31,7 @@
   fl = log -u
   la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
   cp = cherrypick
+  cp = cherry-pick
   st = status
   shs = status -sb
   cl = clone
@@ -43,3 +45,5 @@
   ap = add --patch
   unstg = reset --
   uncmmt = reset --soft HEAD^
+  purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
+  recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
