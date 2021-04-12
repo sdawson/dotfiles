@@ -15,6 +15,12 @@ task :vim_install do
   create_links linkables
 end
 
+task :create_symlinks do
+  linkables = Dir.glob('*/**{.symlink}')
+
+  create_links linkables
+end
+
 def create_links linkables
   skip_all = false
   overwrite_all = false
