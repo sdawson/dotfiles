@@ -50,6 +50,14 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 # Golang env vars
 export GOBIN="${HOME}/bin/go"
 
+# usage:
+# if command_exists mvim; then
+#   export BLAH="mvim --no-fork"
+# fi
+command_exists() {
+  command -v "$1" > /dev/null 2>&1;
+}
+
 unamestr=`uname`
 
 if [ "$unamestr" = "Linux" ]; then
@@ -147,14 +155,6 @@ export NVM_DIR="${HOME}/.nvm"
 #   # files.
 #   ag --nocolor -G "_${HOSTNAME_SHORT}_" --nonumbers --nofilename --nobreak $HOME/.history | sort | uniq -c | sort | fzf +s --tac +m -n1..,.. --tiebreak=index --toggle-sort=ctrl-r
 # }
-
-# usage:
-# if command_exists mvim; then
-#   export BLAH="mvim --no-fork"
-# fi
-command_exists() {
-  command -v "$1" > /dev/null 2>&1;
-}
 
 if [ -f $HOME/.cargo/env ]
 then
