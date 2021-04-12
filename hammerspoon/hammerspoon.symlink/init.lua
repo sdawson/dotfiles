@@ -18,7 +18,7 @@ end
 
 hs.hints.style = "vimperator"
 hs.hints.showTitleThresh = 30
-hs.hotkey.bind({"cmd"}, "E", function()
+hs.hotkey.bind({"cmd"}, "J", function()
   hs.hints.windowHints()
 end)
 
