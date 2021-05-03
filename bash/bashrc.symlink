@@ -19,6 +19,14 @@ export COLUMNS
 
 export TRANSMISSION_HOME=${HOME}/.transmission
 
+# usage:
+# if command_exists mvim; then
+#   export BLAH="mvim --no-fork"
+# fi
+command_exists() {
+  command -v "$1" > /dev/null 2>&1;
+}
+
 # turn off history expansion
 set +H
 
@@ -41,6 +49,22 @@ shopt -s lithist # save multi-line commands to the history with embedded newline
 # fzf settings
 export FZF_DEFAULT_OPTS='--no-height'
 
+if command_exists fd; then
+  export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git . $1"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd -t d . $1"
+
+  # Use fd to generate the list for file completion (e.g. vim **<TAB>)
+  _fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . "$1"
+  }
+
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1"
+  }
+fi
+
 # hstr settings
 export HH_CONFIG=hicolor         # get more colors
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
@@ -49,14 +73,6 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 
 # Golang env vars
 export GOBIN="${HOME}/bin/go"
-
-# usage:
-# if command_exists mvim; then
-#   export BLAH="mvim --no-fork"
-# fi
-command_exists() {
-  command -v "$1" > /dev/null 2>&1;
-}
 
 if command_exists bat; then
   export BAT_CONFIG_PATH="${HOME}/.bat.config"
