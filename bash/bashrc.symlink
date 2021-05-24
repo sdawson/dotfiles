@@ -147,6 +147,7 @@ alias r="$(which R) --no-save"
 alias mv='mv -i'
 alias rm='rm -i'
 alias gdw="git diff --color-words"
+alias b="cd $OLDPWD"
 
 # git shortcuts
 alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
