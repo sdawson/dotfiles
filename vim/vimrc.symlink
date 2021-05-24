@@ -77,6 +77,7 @@ augroup END
 
 " vim-go settings
 let g:go_template_autocreate=0
+let g:go_imports_autosave=0
 
 " make :W == :w
 command! W w
