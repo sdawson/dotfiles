@@ -49,3 +49,4 @@
   uncmmt = reset --soft HEAD^
   purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
   recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
+  ffa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
