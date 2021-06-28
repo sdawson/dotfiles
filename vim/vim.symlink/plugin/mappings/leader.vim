@@ -12,8 +12,8 @@ nnoremap <leader>= <c-w>=
 " <leader>-: Max out the height of a split (e.g. wmii)
 nnoremap <leader>- <c-w>_
 
-" <leader>s: Save vim session
-nnoremap <leader>s :mksession<CR>
+" <leader>k: Save vim session
+nnoremap <leader>k :mksession<CR>
 
 " <leader>y: Toggle line numbers between relative and normal mode
 nnoremap <leader>y :call sophied#functions#NumberToggle()<CR>
