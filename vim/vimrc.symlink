@@ -34,6 +34,7 @@ Plug 'junegunn/vim-after-object'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
+Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
 endif
@@ -49,8 +50,6 @@ let g:camelcasemotion_key='<leader>'
 colorscheme noether
 set t_Co=256
 
-highlight ExtraWhitespace ctermbg=red guibg=#aa4450
-match ExtraWhitespace /\s\+$/
 
 " CtrlP Settings
 
@@ -90,3 +89,7 @@ let g:vim_markdown_folding_disabled=1
 
 " vim-javascript settings
 let g:javascript_plugin_flow=1
+
+" vim-better-whitespace settings
+let g:strip_whitespace_confirm=0
+let g:strip_only_modified_lines=1
