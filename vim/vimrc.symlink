@@ -92,4 +92,3 @@ let g:javascript_plugin_flow=1
 
 " vim-better-whitespace settings
 let g:strip_whitespace_confirm=0
-let g:strip_only_modified_lines=1
