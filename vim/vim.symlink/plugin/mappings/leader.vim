@@ -44,8 +44,11 @@ nnoremap <leader>f <C-^>
 nnoremap <leader>p :echo expand('%')<CR>
 
 " <localleader>h: Fix syntax highlighting issues in the current buffer
-nnoremap <silent> <localleader>s :syntax sync fromstart<CR>
+nnoremap <silent> <localleader>h :syntax sync fromstart<CR>
 
 " <localleader>e: Edit file, starting from the same directory as the current
 " file
 nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
+
+" <localleader>s: Show the syntax group name of the item under the cursor
+nnoremap <localleader>s :call sophied#functions#SyntaxAttr()<CR>
