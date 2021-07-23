@@ -60,9 +60,7 @@ let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
 let g:ctrlp_cmd="CtrlPMRU"
 let g:ctrlp_max_files=20000
-let g:ctrlp_custom_ignore= {
-  \ 'dir': '\v[\/](node_modules|reports|flow-types)|(\.(git|hg|svn))',
-\}
+let g:ctrlp_extensions = ['autoignore']
 if executable('ag') " Use silver searcher for listing files if available
   let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 endif
