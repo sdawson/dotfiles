@@ -9,12 +9,14 @@ task :install do
   install_vim_plug
 end
 
+desc "install vim symlinks only"
 task :vim_install do
   linkables = Dir.glob('vim/**{.symlink}')
 
   create_links linkables
 end
 
+desc "create all symlinks only"
 task :create_symlinks do
   linkables = Dir.glob('*/**{.symlink}')
 
@@ -52,6 +54,7 @@ def create_links linkables
   end
 end
 
+desc "uninstall dotfiles"
 task :uninstall do
   Dir.glob('**/*.symlink').each do |linkable|
     file = linkable.split('/').last.split('.symlink').last
@@ -61,19 +64,20 @@ task :uninstall do
     if File.symlink?(target)
       FileUtils.rm(target)
     end
-    
+
     # Remove karabiner config manual symlink
     remove_karabiner_config
 
     # Replace any backups made during installation
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
-      `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
+      `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"`
     end
 
     remove_vim_plug
   end
 end
 
+desc "install vim plug"
 task :vim_plug do
   install_vim_plug
 end
@@ -91,6 +95,7 @@ def remove_vim_plug
   end
 end
 
+desc "install karabiner elements"
 task :karabiner do
   config_dir = "mac/karabiner_elements/karabiner"
   target = "#{ENV["HOME"]}/.config"
@@ -103,6 +108,7 @@ task :karabiner do
   `launchctl kickstart -k "gui/#{user_id}/org.pqrs.karabiner.karabiner_console_user_server"`
 end
 
+desc "uninstall karabiner elements"
 task :karabiner_uninstall do
   remove_karabiner_config
 end
