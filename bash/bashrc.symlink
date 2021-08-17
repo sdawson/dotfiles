@@ -66,6 +66,9 @@ if command_exists fd; then
   }
 fi
 
+# ripgrep settings
+export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+
 # hstr settings
 export HH_CONFIG=hicolor         # get more colors
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
