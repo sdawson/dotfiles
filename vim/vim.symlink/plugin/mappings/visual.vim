@@ -6,3 +6,8 @@ xnoremap > >gv
 xnoremap . :normal .<CR>
 
 xmap ga <Plug>(EasyAlign)
+
+xmap zy <Plug>SystemCopy
+xmap zY <Plug>SystemCopyLine
+xmap zp <Plug>SystemPaste
+xmap zP <Plug>SystemPasteLine

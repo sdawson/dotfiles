@@ -14,3 +14,8 @@ nnoremap <silent> <c-h> :wincmd h<CR>
 nnoremap <silent> <c-l> :wincmd l<CR>
 
 nmap ga <Plug>(EasyAlign)
+
+nmap zy <Plug>SystemCopy
+nmap zY <Plug>SystemCopyLine
+nmap zp <Plug>SystemPaste
+nmap zP <Plug>SystemPasteLine
