@@ -35,6 +35,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'christoomey/vim-system-copy'
 
 call plug#end()
 endif
