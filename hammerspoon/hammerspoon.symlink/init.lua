@@ -1,53 +1,135 @@
-hs.logger.defaultLogLevel = "info"
+local hotkey = require "hs.hotkey"
+local window = require "hs.window"
+local application = require "hs.application"
+local hints = require "hs.hints"
 
-lg = hs.logger.new("blah", "info")
+window.animationDuration = 0
 
-hs.hotkey.bind({"cmd", "alt"}, "V", function()
-  hs.eventtap.keyStrokes(hs.pasteboard.getContents())
+hints.style = "vimperator"
+hints.showTitleThresh = 30
+hotkey.bind({"cmd"}, "J", function()
+  hints.windowHints()
 end)
 
-local pos = hs.screen.screenPositions()
-for k, v in pairs(pos) do
-  lg.i(k)
-  for k2, v2 in pairs(v) do
-    lg.i(k2)
-    lg.i(v2)
-  end
-end
--- lg.i(hs.screen.screenPositions())
-
-hs.hints.style = "vimperator"
-hs.hints.showTitleThresh = 30
-hs.hotkey.bind({"cmd"}, "J", function()
-  hs.hints.windowHints()
-end)
-
--- these layouts assume they're being set as part of the unitrect layout 
--- setting
-local gobig = {x = 0, y = 0, w = 1, h = 1}
-local gosmallerleft = {x = 0, y = 0, w = 0.4, h = 1}
-local gobiggerright = {x = 0.4, y = 0, w = 0.60, h = 1}
-
-local leftscreen = hs.screen.find("0,0")
-local rightscreen = hs.screen.find("1,0")
-
--- layout format reminder
--- {"App name", "Window name", "Display/screen name", "unitrect", "framerect", "fullframerect"}
--- Can only specify one of unitrect, framerect and fullframerect
-
--- layout for two screens
-local worklayout = {
-  {"MacVim",        nil, leftscreen,  gobig,         nil, nil},
-  {"iTerm2",         nil, rightscreen, gosmallerleft, nil, nil},
-  {"Google Chrome", nil, rightscreen, gobiggerright, nil, nil},
-  -- {"Slack",         nil, leftscreen,  what,          nil, nil} -- TODO: not sure for this, should just be on one screen in whatever size it is normally
+local apps = {
+  { key = "c", app = "google chrome" },
+  { key = "v", app = "MacVim" },
+  { key = "s", app = "slack" },
+  { key = "t", app = "iterm" },
+  { key = "a", app = "the archive" },
+  { key = "x", app = "textedit" }
 }
 
-hs.hotkey.bind({"cmd", "alt"}, "2", function()
-  hs.layout.apply(worklayout)
+for i, object in ipairs(apps) do
+  hotkey.bind({"cmd", "alt", "ctrl", "shift"}, object.key, function()
+    application.launchOrFocus(object.app)
+  end)
+end
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "1", function()
+  -- move the focused window one display to the left
+  local win = window.focusedWindow()
+  win:moveOneScreenWest()
 end)
 
--- TODO:
---  - add a hotkey to arrange the active window (this is probably for making a 
---  second browser window go to the left behind the terminal so that I can be 
---  looking at two browser windows simultaneously
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "2", function()
+  -- move the focused window one display to the right
+  local win = window.focusedWindow()
+  win:moveOneScreenEast()
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "h", function()
+  -- size focused window to left half of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "l", function()
+  -- size focused window to right half of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w / 2)
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "j", function()
+  -- size focused window to left 40% of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = 4 * max.w / 10
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "k", function()
+  -- size focused window to right 60% of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (4 * max.w / 10)
+  f.y = max.y
+  f.w = 6 * max.w / 10
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, ";", function()
+  -- size focused window to left 60% of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = 6 * max.w / 10
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "'", function()
+  -- size focused window to right 40% of display
+  local win = window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (6 * max.w / 10)
+  f.y = max.y
+  f.w = 4 * max.w / 10
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "m", function()
+  -- maximuze focused window to cover whole screen
+  local win = window.focusedWindow()
+  win:maximize()
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "o", function()
+  -- center focused window on screen
+  local win = window.focusedWindow()
+  win:centerOnScreen()
+end)
