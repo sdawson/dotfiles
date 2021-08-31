@@ -7,6 +7,7 @@ window.animationDuration = 0
 
 hints.style = "vimperator"
 hints.showTitleThresh = 30
+hints.fontSize = 15.0
 hotkey.bind({"cmd"}, "J", function()
   hints.windowHints()
 end)
