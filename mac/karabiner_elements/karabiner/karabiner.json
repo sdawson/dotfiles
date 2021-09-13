@@ -42,7 +42,7 @@
                         ]
                     },
                     {
-                        "description": "caps lock to caps lock on single press, to command+control+option+shift on hold",
+                        "description": "caps lock to caps lock on single press, to command+control+option+right shift on hold",
                         "manipulators": [
                             {
                                 "from": {
@@ -55,7 +55,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_shift",
+                                        "key_code": "right_shift",
                                         "modifiers": [
                                             "left_gui",
                                             "left_alt",
