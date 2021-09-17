@@ -33,7 +33,7 @@ set backspace=indent,eol,start
 " When joining lines that end with '.', '?' or '!', only insert one space, not two
 set nojoinspaces
 
-set history=50
+set history=300
 
 set backupcopy=yes " overwrite files to update, rather than renaming and rewriting
 if exists('$SUDO_USER')
