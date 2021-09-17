@@ -41,11 +41,14 @@ if exists('$SUDO_USER')
   set nowritebackup
 else
   set backup
-  set backupdir=~/.vim/backup
+  set backupdir=~/.vim/backup//
 endif
 
 if exists('$SUDO_USER')
   set noswapfile
+else
+  set directory=~/.vim/swap//
+  set directory+=.
 endif
 
 if v:version > 703
@@ -72,7 +75,8 @@ if has("persistent_undo")
   if exists('$SUDO_USER')
     set noundofile
   else
-    set undodir=~/.vim/undodir
+    set undodir=~/.vim/undodir//
+    set undodir+=.
     set undofile
     set undolevels=1000 " max number of changes that can be undone
     set undoreload=10000 " max number of lines to save in undofile when a buffer reloads
