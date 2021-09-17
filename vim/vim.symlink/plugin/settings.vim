@@ -34,6 +34,8 @@ set backspace=indent,eol,start
 set nojoinspaces
 
 set history=50
+
+set backupcopy=yes " overwrite files to update, rather than renaming and rewriting
 if exists('$SUDO_USER')
   set nobackup
   set nowritebackup
