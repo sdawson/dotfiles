@@ -8,6 +8,8 @@ set showcmd
 set report=0
 set visualbell
 
+set nomodeline
+
 set incsearch
 set hlsearch
 set showmatch
