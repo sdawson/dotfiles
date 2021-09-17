@@ -72,6 +72,12 @@ set cursorlineopt=number
 " Spellcheck settings
 set spelllang=en_au
 
+" Spellcheck camelCased words as words delimited by the uppercase letters
+" in the word
+if exists('+spelloptions')
+  set spelloptions+=camel
+end
+
 " Persistent Undo
 if has("persistent_undo")
   if exists('$SUDO_USER')
