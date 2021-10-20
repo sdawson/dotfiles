@@ -1,0 +1,21 @@
+OPTIONS=color
+OPTIONS=catname:Tuna
+OPTIONS=dogname:Helen
+OPTIONS=symset:DECgraphics
+
+OPTIONS=menucolors
+MENUCOLOR="blessed"=green
+MENUCOLOR="holy"=green
+MENUCOLOR="uncursed"=cyan&bold
+MENUCOLOR=" cursed"=red
+MENUCOLOR="unholy"=red
+MENUCOLOR="cursed .* (being worn)"=orange&underline
+
+OPTIONS=statushilites
+OPTIONS=hitpointbar
+OPTIONS=hilite_status:hitpoints/100%/grey&normal
+OPTIONS=hilite_status:hitpoints/<100%/green&normal
+OPTIONS=hilite_status:hitpoints/<66%/yellow&normal
+OPTIONS=hilite_status:hitpoints/<50%/orange&normal
+OPTIONS=hilite_status:hitpoints/<33%/red&bold
+OPTIONS=hilite_status:hitpoints/<15%/red&inverse
