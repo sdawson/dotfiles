@@ -2,6 +2,8 @@ OPTIONS=color
 OPTIONS=catname:Tuna
 OPTIONS=dogname:Helen
 OPTIONS=symset:DECgraphics
+OPTIONS=autopickup
+OPTIONS=pickup_types:$"?+!=/
 
 OPTIONS=menucolors
 MENUCOLOR="blessed"=green
