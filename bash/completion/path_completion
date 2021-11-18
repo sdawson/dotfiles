@@ -1,0 +1,13 @@
+_dcBackwardsPathCompletion() {
+  # Note: must be used with complete -o nospace
+  # $1=cmd $2=cur $3=pre
+  local cwd="${2:-$PWD}"
+  local upd="${cwd%/*}"
+  if [[ $cwd == '/' ]]; then
+      return
+  elif [[ $upd == '' ]]; then
+      COMPREPLY=('/')
+  else
+      COMPREPLY=("$upd")
+  fi
+}
