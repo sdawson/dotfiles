@@ -4,6 +4,8 @@ OPTIONS=dogname:Helen
 OPTIONS=symset:DECgraphics
 OPTIONS=autopickup
 OPTIONS=pickup_types:$"?+!=/
+OPTIONS=boulder:0
+OPTIONS=legacy:false
 
 OPTIONS=menucolors
 MENUCOLOR="blessed"=green
