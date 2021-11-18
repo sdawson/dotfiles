@@ -49,6 +49,7 @@ shopt -s lithist # save multi-line commands to the history with embedded newline
 # fzf settings
 export FZF_DEFAULT_OPTS='--no-height'
 export FZF_ALT_C_OPTS='--keep-right'
+export FZF_CTRL_R_OPTS="${FZF_CTRL_R_OPTS:+$FZF_CTRL_R_OPTS} --preview 'echo {}' --preview-window down:5:hidden:wrap --bind '?:toggle-preview'"
 
 if command_exists fd; then
   export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git . $1"
