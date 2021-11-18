@@ -43,6 +43,12 @@ nnoremap <leader>f <C-^>
 " a split that's too small to see the file path in the status line)
 nnoremap <leader>p :echo expand('%')<CR>
 
+" <leader>ev: Open vimrc file for editing
+nnoremap <silent> <leader>ev :execute 'edit' resolve($MYVIMRC)<cr>
+
+" <leader>xv: Reload vimrc file in current session
+nnoremap <silent> <leader>xv :source $MYVIMRC<cr>
+
 " <localleader>h: Fix syntax highlighting issues in the current buffer
 nnoremap <silent> <localleader>h :syntax sync fromstart<CR>
 
