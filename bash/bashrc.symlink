@@ -51,6 +51,14 @@ export FZF_DEFAULT_OPTS='--no-height'
 export FZF_ALT_C_OPTS='--keep-right'
 export FZF_CTRL_R_OPTS="${FZF_CTRL_R_OPTS:+$FZF_CTRL_R_OPTS} --preview 'echo {}' --preview-window down:5:hidden:wrap --bind '?:toggle-preview'"
 
+fzf-blah() {
+  fzf -m --bind '?:toggle-preview,ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all' "$@"
+}
+
+fzrg() {
+  rg "$@" --color=always | fzf-blah --ansi | cut -d':' -f1 | uniq | xargs rg -p "$@"
+}
+
 if command_exists fd; then
   export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git . $1"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
