@@ -62,6 +62,7 @@
   upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
   graph = log --graph --all --decorate --stat --date=iso # more complex git log
   ap = add --patch
+  an = add --intent-to-add # makes new files unstaged, so they can be incrementally staged
   unstg = reset --
   uncmmt = reset --soft HEAD^
   purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
