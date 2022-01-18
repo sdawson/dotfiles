@@ -120,6 +120,9 @@ elif [ "$unamestr" = "Darwin" ]; then
   export PATH=${PATH}:${HOME}/dev/root/bin
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/dev/root/lib
 
+  # Silence bash->zsh deprecation warning
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+
   # Exports for node
   export NODE_PATH="/usr/local/lib/node"
 
