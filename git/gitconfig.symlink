@@ -35,14 +35,14 @@
 [interactive]
   diffFilter = delta --color-only
 [alias]
+  la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
   ls = log --pretty=oneline
   ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'
+  fl = log -u # show the history of a particular file
+  upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
+  graph = log --graph --all --decorate --stat --date=iso # more complex git log
   resettoremote = "!f() { git reset --hard $1 }; f"
   rtr = "!f() { git reset --hard $1; }; f"
-  filelog = log -u # show the history of a particular file
-  fl = log -u
-  la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
-  cp = cherrypick
   cp = cherry-pick
   st = status
   shs = status -sb
@@ -53,18 +53,19 @@
   br = branch
   bd = branch -d
   bdd = branch -D
-  bm = branch -m # new branch name here
+  bn = branch -m # new branch name here
   rb = rebase -i
   rbc = rebase --continue
   sp = push --force-with-lease # safe push (checks the local copy of what you're pushing is up to date with upstream before force pushing)
+  spo = "!git push --force-with-lease -u origin $(git symbolic-ref --short HEAD)"
+  po = "!git push -u origin $(git symbolic-ref --short HEAD)"
   it = '!git init && git commit -m "root" --allow-empty'
   wd = diff --word-diff # diff on words for viewing prose diffs
-  upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
-  graph = log --graph --all --decorate --stat --date=iso # more complex git log
   ap = add --patch
   an = add --intent-to-add # makes new files unstaged, so they can be incrementally staged
-  unstg = reset --
-  uncmmt = reset --soft HEAD^
+  unst = restore --staged
+  uncommit = reset --soft HEAD^
   purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
   recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
   ffa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+  fixup = '!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f'
