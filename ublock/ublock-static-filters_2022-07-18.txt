@@ -1,0 +1,8 @@
+stackexchange.com##.js-consent-banner
+superuser.com##.js-consent-banner
+stackoverflow.com##.js-consent-banner
+mathoverflow.net##.js-consent-banner
+serverfault.com##.js-consent-banner
+askubuntu.com##.js-consent-banner
+stackapps.com##.js-consent-banner
+
