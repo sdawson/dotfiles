@@ -5,4 +5,9 @@ mathoverflow.net##.js-consent-banner
 serverfault.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
 stackapps.com##.js-consent-banner
+##[data-testid="DMDrawer"]
+twitter.com##[id^="layers"] > [class^="css-"]:has([dir^="auto"]):not(:has([aria-expanded])):has(a[href^="/"]):has-text(/Log in|Sign Up/)
+twitter.com##html[dir]:style(overflow: auto !important;)
+twitter.com##.r-11nfnuw.r-16wqof.r-1dqxon3.r-16y2uox.r-kemksi.css-1dbjc4n
+twitter.com##.r-g6jmlv.r-ipm5af.r-1xcajam.r-xr3zp9.r-1pjcn9w.r-1777fci.r-1pi2tsx.r-18u37iz.r-1kihuf0.r-1awozwy.css-1dbjc4n
 
