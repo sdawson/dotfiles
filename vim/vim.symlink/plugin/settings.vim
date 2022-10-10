@@ -67,7 +67,9 @@ if exists('+relativenumber')
   set relativenumber
 endif
 set cursorline
-set cursorlineopt=number
+if exists('+cursorlineopt')
+  set cursorlineopt=number
+endif
 
 " Spellcheck settings
 set spelllang=en_au
