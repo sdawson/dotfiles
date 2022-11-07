@@ -16,6 +16,18 @@
 [diff]
   renames = copies
   mnemonicprefix = true
+[diff "rspec"]
+  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
+[diff "swift"]
+  xfuncname = ^[ \t]*((class|func)[ \t].*)$
+[diff "rstats"]
+  xfuncname = "^([a-zA-z.]+ <- function.*)$"
+[diff "texinfo"]
+  xfuncname = "^@node[ \t][ \t]*\\([^,][^,]*\\)"
+[diff "rust"]
+  xfuncname = "^[ \t]*(pub|)[ \t]*((fn|struct|enum|impl|trait|mod)[^;]*)$"
+[diff "ecmascript"]
+  xfuncname = "^((.*function.*)|([ \t]+it\\(.*))$"
 [merge]
   conflictstyle = diff3
 [branch]
