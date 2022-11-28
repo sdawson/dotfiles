@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+gh pr list | fzf --height 25% --reverse | cut -f1 | xargs gh pr checkout
