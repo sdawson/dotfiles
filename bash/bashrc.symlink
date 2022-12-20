@@ -143,6 +143,10 @@ elif [ "$unamestr" = "Darwin" ]; then
     source ~/.git-prompt.sh
   fi
 
+  # support using lesspipe to enable listing the files in a zip
+  # via `less name_of_file.zip`
+  export LESSOPEN="|/opt/homebrew/bin/lesspipe.sh %s"
+
   GIT_PS1_SHOWDIRTYSTATE=true
   export PS1='[\u@\h \W$(__git_ps1)]\$ '
 
