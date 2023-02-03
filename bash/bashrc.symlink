@@ -170,8 +170,6 @@ alias gdw="git diff --color-words"
 alias b="cd $OLDPWD"
 
 # git shortcuts
-alias gitinfo='${HOME}/.dotfiles/git/git-info.txt'
-alias gbd='${HOME}/.dotfiles/git/git-branch-dates.txt'
 alias gitroot='cd $(git rev-parse --show-toplevel) && echo "$_"'
 # alias gl="git log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'"
 
