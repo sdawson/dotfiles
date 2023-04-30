@@ -162,7 +162,9 @@ alias fzfhist="${HOME}/.dotfiles/bash/fzfhist.bash"
 alias dockerclean="${HOME}/.dotfiles/bash/docker_clean.bash"
 alias timehelp="${HOME}/.dotfiles/bash/timestamp_help.bash"
 alias gls="${HOME}/bin/gitlogsince.sh"
-alias r="$(which R) --no-save"
+if command_exists R; then
+  alias r="$(which R) --no-save"
+fi
 alias mv='mv -i'
 alias rm='rm -i'
 alias gdw="git diff --color-words"
