@@ -78,12 +78,6 @@ fi
 # ripgrep settings
 export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 
-# hstr settings
-export HH_CONFIG=hicolor         # get more colors
-export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
-# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
-
 # Golang env vars
 export GOBIN="${HOME}/bin/go"
 
