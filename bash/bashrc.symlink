@@ -189,6 +189,10 @@ export NVM_DIR="${HOME}/.nvm"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+if [ -f "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh" ]; then
+  source "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh"
+fi
+
 if [ -f $HOME/.cargo/env ]
 then
   source "$HOME/.cargo/env"
