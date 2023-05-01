@@ -96,7 +96,19 @@ if [ "$unamestr" = "Linux" ]; then
   export TERMINAL=xterm
   alias unison='unison-gtk2'
 
-  PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+  SETGITPROMPT=false
+  if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    source /usr/share/git/completion/git-prompt.sh
+    SETGITPROMPT=true
+  elif [ -f /run/current-system/sw/share/bash-completion/completions/git-prompt.sh ]; then
+    source "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh"
+    SETGITPROMPT=true
+  fi
+
+  if [ "$SETGITPROMPT" = true ]; then
+    GIT_PS1_SHOWDIRTYSTATE=true
+    PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+  fi
 
   alias ls='ls --color=auto'
   alias sl='ls --color=auto'
@@ -188,10 +200,6 @@ export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-if [ -f "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh" ]; then
-  source "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh"
-fi
 
 if [ -f $HOME/.cargo/env ]
 then
