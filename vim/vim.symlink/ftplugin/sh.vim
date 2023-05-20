@@ -1,1 +1,2 @@
 EnableStripWhitespaceOnSave
+setlocal textwidth=0
