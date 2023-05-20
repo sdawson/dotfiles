@@ -37,6 +37,8 @@ Plug 'jparise/vim-graphql'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'christoomey/vim-system-copy'
 Plug 'LnL7/vim-nix'
+Plug 'vim-scripts/copypath.vim'
+Plug 'chrisbra/csv.vim'
 
 call plug#end()
 endif
