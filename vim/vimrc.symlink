@@ -78,6 +78,11 @@ augroup highlightlonglines
   autocmd BufNewFile,BufRead * call sophied#functions#HighlightTooLongLines()
 augroup END
 
+augroup splitresizing
+  autocmd!
+  autocmd VimResized * wincmd =
+augroup END
+
 " Remove _ to <- replacement in vim-r-plugin
 " let vimrplugin_underscore=0
 
