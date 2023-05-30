@@ -81,3 +81,5 @@
   recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
   ffa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
   fixup = '!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f'
+[include]
+  path = ~/.gitconfig-local
