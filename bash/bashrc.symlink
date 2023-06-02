@@ -201,6 +201,11 @@ done
 dc() { cd ${1:-..}; }
 complete -o nospace -F _dcBackwardsPathCompletion dc
 
+if [ -d ${HOME}/bin/sd ]; then
+  export PATH=${HOME}/bin/sd:${PATH}
+  export SD_ROOT=${HOME}/.dotfiles/scripts
+fi
+
 export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
