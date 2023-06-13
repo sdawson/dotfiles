@@ -1,10 +1,10 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # author: Duane Johnson
 # email: duane.johnson@gmail.com
 # date: 2008 Jun 12
 # license: MIT
-# 
+#
 # Based on discussion at http://kerneltrap.org/mailarchive/git/2007/11/12/406496
 
 pushd . >/dev/null
