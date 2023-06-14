@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+sudo nixos-rebuild switch -I nixos-config=/home/soph/nixos-configs/hosts/${hostname}/configuration.nix
