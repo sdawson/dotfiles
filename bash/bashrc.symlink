@@ -204,6 +204,8 @@ complete -o nospace -F _dcBackwardsPathCompletion dc
 if [ -d ${HOME}/bin/sd ]; then
   export PATH=${HOME}/bin/sd:${PATH}
   export SD_ROOT=${HOME}/.dotfiles/scripts
+elif command_exists sd; then
+  export SD_ROOT=${HOME}/.dotfiles/scripts
 fi
 
 export NVM_DIR="${HOME}/.nvm"
