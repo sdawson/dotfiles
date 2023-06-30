@@ -34,6 +34,8 @@
   autosetupmerge = true
 [push]
   default = tracking
+[rebase]
+  updateRefs = true
 [rerere]
   enabled = 1
 [pager]
