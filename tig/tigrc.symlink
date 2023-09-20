@@ -3,3 +3,15 @@ set show-changes = yes
 set commit-order = topo
 set refresh-mode = auto
 set main-view = date:default author:abbreviated id:yes,color commit-title:graph=yes,refs=yes
+
+bind main w !?git push origin
+bind main B !git rebase -i %(commit)
+
+bind status a !?git commit --amend
+bind status P !?git push --force-with-lease
+bind status w !?git push origin
+bind status N !@git add -N %(file)
+bind status n !git add --patch %(file)
+
+bind stash D !?git stash drop %(stash)
+bind stash A !?git stash apply %(stash)
