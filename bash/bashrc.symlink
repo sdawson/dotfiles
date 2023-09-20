@@ -59,6 +59,10 @@ fzrg() {
   rg "$@" --color=always | fzf-blah --ansi | cut -d':' -f1 | uniq | xargs rg -p "$@"
 }
 
+fzrg_debug() {
+  rg "$@" --color=always | fzf-blah --ansi | cut -d' ' -f1 | sed 's/:$//' | uniq
+}
+
 if command_exists fd; then
   export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git . $1"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
