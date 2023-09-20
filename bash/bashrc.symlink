@@ -201,8 +201,10 @@ do
   source "$config_file"
 done
 
-dc() { cd ${1:-..}; }
-complete -o nospace -F _dcBackwardsPathCompletion dc
+if command_exists complete; then
+  dc() { cd ${1:-..}; }
+  complete -o nospace -F _dcBackwardsPathCompletion dc
+fi
 
 if [ -d ${HOME}/bin/sd ]; then
   export PATH=${HOME}/bin/sd:${PATH}
