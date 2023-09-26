@@ -44,7 +44,10 @@ nnoremap <leader>f <C-^>
 
 " <leader>p: Show the path of the current file (for when you're in
 " a split that's too small to see the file path in the status line)
-nnoremap <leader>p :echo expand('%')<CR>
+nnoremap <leader>ps :echo expand('%')<CR>
+
+" Copy the line number and filename of the current file into the + register
+nnoremap <leader>py :let @+=expand('%') . ':' . line('.')<cr>
 
 " <leader>ev: Open vimrc file for editing
 nnoremap <silent> <leader>ev :execute 'edit' resolve($MYVIMRC)<cr>
