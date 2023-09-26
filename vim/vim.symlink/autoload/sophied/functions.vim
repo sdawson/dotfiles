@@ -131,3 +131,22 @@ function! sophied#functions#SyntaxAttr() abort
   echo message
   echohl None
 endfunction
+
+function! sophied#functions#OnLspBufferEnabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes # what does this mean?
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gr <plug>(lsp-references)
+
+  let g:lsp_format_sync_timeout=1000
+  let g:lsp_inlay_hints_enabled = 1
+  let g:lsp_inlay_hints_mode = {
+  \  'normal': ['always'],
+  \}
+  hi link lspInlayHintsType Comment
+  hi link lspInlayParameter Comment
+endfunction
+
+function! sophied#functions#ToggleLsp() abort
+endfunction

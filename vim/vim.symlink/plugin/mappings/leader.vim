@@ -18,8 +18,11 @@ nnoremap <leader>k :mksession<CR>
 " <leader>y: Toggle line numbers between relative and normal mode
 nnoremap <leader>y :call sophied#functions#NumberToggle()<CR>
 
-" <leader>l: Toggle line wrapping on or off
-nnoremap <leader>l :call sophied#functions#WrapToggle()<CR>
+" <leader>tw: Toggle line wrapping on or off
+nnoremap <leader>tw :call sophied#functions#WrapToggle()<CR>
+
+" <leader>tl: Toggle line wrapping on or off
+nnoremap <leader>tl :call sophied#functions#ToggleLsp()<CR>
 
 " <leader>d: Insert todays date into the current buffer
 nnoremap <leader>d :call sophied#functions#Today()<CR>
