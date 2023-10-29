@@ -43,6 +43,9 @@ Plug 'prabirshrestha/vim-lsp'
 if !has('nvim')
   Plug 'rhysd/vim-healthcheck'
 endif
+" A plugin that tries to intelligently turn off highlighting when
+" you're done searching
+Plug 'romainl/vim-cool'
 
 call plug#end()
 endif
