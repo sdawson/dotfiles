@@ -7,6 +7,10 @@
 # Shortcut to the dotfiles dir
 export DOT=$HOME/.dotfiles
 
+# source the source_relative script that allows for relative sourcing for
+# referencing bash functions
+source "${HOME}/.dotfiles/bash/source_relative.bash"
+
 # If not running interactively, don't do anything
 #[[ $- != *i* ]] && return
 
