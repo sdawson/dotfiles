@@ -179,6 +179,18 @@ elif [ "$unamestr" = "Darwin" ]; then
   alias ll='ls -Gl'
   alias la='ls -Gal'
   alias lh='la -cth'
+
+  source_relative_once ".dotfiles/bash/prepend_path.bash"
+  # Fix for nix symlinks breaking on mac os updates
+  if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+
+    # the nix-daemon script doesn't check to see if it's already in PATH,
+    # so redo the nix-related PATH updates to make sure they're not repeated
+    # more than once
+    [ -d /nix/var/nix/profiles/default/bin ] && prepend_path /nix/var/nix/profiles/default/bin
+    [ -d $HOME/.nix-profile/bin ] && prepend_path $HOME/.nix-profile/bin
+  fi
 fi
 
 alias givm='gvim'
