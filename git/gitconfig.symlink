@@ -19,7 +19,7 @@
 [diff "rspec"]
   xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [diff "swift"]
-  xfuncname = ^[ \t]*((class|func)[ \t].*)$
+  xfuncname = "^[ \t]*((class|func)[ \t].*)$"
 [diff "rstats"]
   xfuncname = "^([a-zA-z.]+ <- function.*)$"
 [diff "texinfo"]
