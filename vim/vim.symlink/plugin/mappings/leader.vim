@@ -34,7 +34,11 @@ nnoremap <leader>r :windo e<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " <leader>c: Activate scalpel plugin
-nnoremap <leader>c <Plug>(Scalpel)
+nnoremap <leader>cs <Plug>(Scalpel)
+
+" <leader>cd: change working directory for the current buffer towards
+" the directory of the file being edited
+nnoremap <leader>cd :lcd %:h<CR>
 
 " <leader>o: Close all windows except the current one
 nnoremap <leader>o :only<CR>
