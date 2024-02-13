@@ -55,7 +55,6 @@
   fl = log -u # show the history of a particular file
   upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
   graph = log --graph --all --decorate --stat --date=iso # more complex git log
-  resettoremote = "!f() { git reset --hard $1 }; f"
   rtr = "!f() { git reset --hard $1; }; f"
   cp = cherry-pick
   st = status
@@ -64,12 +63,15 @@
   co = checkout
   c = commit
   ca = commit --amend
+  f = fetch
   br = branch
   bd = branch -d
   bdd = branch -D
   bn = branch -m # new branch name here
-  rb = rebase -i
+  rb = rebase
+  rbi = rebase -i
   rbc = rebase --continue
+  rba = rebase --abort
   sp = push --force-with-lease # safe push (checks the local copy of what you're pushing is up to date with upstream before force pushing)
   spo = "!git push --force-with-lease -u origin $(git symbolic-ref --short HEAD)"
   po = "!git push -u origin $(git symbolic-ref --short HEAD)"
