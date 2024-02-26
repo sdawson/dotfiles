@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+
+# Source: https://github.com/justinhoward/misc-scripts/blob/master/bin/gh-changelog
+
+usage() {
+  cat >&2 <<EOF
+Usage: gh-changelog [OPTIONS] [...RANGE]
+Generate a changelog based on merged PRs from GitHub
+
+RANGE: A commit range string for "git rev-list". By default, this is the
+  latest tag to the current HEAD.
+
+OPTIONS
+-b       Branch - The git branch to operate on (default HEAD)
+-f       Format - The output format (list [default], json)
+-h       Help - Show this help message
+-o       Owner - The GitHub repository owner (defaults to the current repo owner)
+-r       Repo - The GitHub repository (defaults to the current repo)
+-s       Max Skips - The maximum number of PRs that will be skipped before
+           deciding that we're done (default 50).
+-v       Verbose - Print verbose messaging
+EOF
+}
+
+msg() {
+  printf '%s\n' "$*" >&2
+}
+
+verbose() {
+  [ -n "$verbose" ] && msg "$@"
+}
+
+error_exit() {
+  msg "$@"
+  exit 1
+}
+
+# usage_error(message...)
+# Print an error and usage information, then exit
+usage_error() {
+  [ "$#" -gt 0 ] && printf '%s\n\n' "$*" >&2
+  usage
+  exit 1
+}
+
+if ! command -v git > /dev/null; then
+  error_exit 'git is required'
+fi
+
+if ! command -v gh > /dev/null; then
+  error_exit 'The GitHub CLI (gh) is required https://cli.github.com/'
+fi
+
+if ! command -v jq > /dev/null; then
+  error_exit 'The jq JSON parser is required https://stedolan.github.io/jq/'
+fi
+
+if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+  error_exit 'Bash version 4 or greater required'
+fi
+
+while getopts :b:f:ho:r:s:v opt; do
+  case "$opt" in
+    b) branch="$OPTARG" ;;
+    f) format="$OPTARG" ;;
+    h) usage && exit ;;
+    o) owner="$OPTARG" ;;
+    r) repo="$OPTARG" ;;
+    s) max_skips="$OPTARG" ;;
+    v) verbose=1 ;;
+    \?) usage_error "Invalid option -${OPTARG}" ;;
+    :) usage_error "Missing value for option -${OPTARG}" ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [ -z "$owner" ] || [ -z "$repo" ]; then
+  url="$(git remote get-url origin)"
+  [ "$?" -ne 0 ] && error_exit 'Could not get git branch'
+
+  if [ -z "$owner" ]; then
+    owner="${url%%/*}"
+    owner="${owner##*[:/]}"
+  fi
+
+  if [ -z "$repo" ]; then
+    repo=${url##*/}
+    repo="${repo%%.*}"
+  fi
+fi
+
+if [ -z "$branch" ]; then
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+  [ "$?" -ne 0 ] && error_exit 'Could not get git head branch name'
+fi
+
+if [ -z "$format" ]; then
+  format=list
+fi
+
+if [ "$#" -gt 0 ]; then
+  range=("$@")
+else
+  start="$(git describe --tags --abbrev=0 "$branch")"
+  [ "$?" -ne 0 ] && error_exit 'Could not get git latest tag'
+
+  end="HEAD"
+  range=("$start..$end")
+fi
+
+[ -z "$max_skips" ] && max_skips=50
+
+verbose "Owner: $owner"
+verbose "Repo: $repo"
+verbose "Branch: $branch"
+verbose "Range: ${range[*]}"
+
+declare -A range_refs
+while read -r ref; do
+  range_refs["$ref"]=1
+done < <(git rev-list "${range[@]}")
+
+page=1
+not_found=0
+page_size=100
+declare -A found_refs
+while true; do
+  prs=$(
+    gh api "repos/${owner}/${repo}/pulls?base=${branch}&page=${page}&state=closed&sort=updated&direction=desc&per_page=${page_size}" \
+      | jq -c '.[]'
+  )
+  [ "$?" -ne 0 ] && error_exit 'Error fetching PRs from GitHub'
+
+  [ -z "$prs" ] && break
+
+  while read -r line; do
+    number="$(echo "$line" | jq -r .number)"
+    merge_commit_sha="$(echo "$line" | jq -r .merge_commit_sha)"
+
+    if [ -z "$merge_commit_sha" ]; then
+      verbose "No merge commit for #${number}. Skipping"
+      continue
+    fi
+
+    if [ -n "${range_refs[$merge_commit_sha]}" ]; then
+      verbose "Adding #${number} for ${merge_commit_sha}"
+      found_refs["$merge_commit_sha"]="$line"
+    else
+      verbose "${merge_commit_sha} not found"
+      not_found=$((not_found + 1))
+    fi
+  done < <(echo "$prs")
+
+  if [ "$not_found" -ge "$max_skips" ]; then
+    verbose "${not_found} PRs not found in range (> ${max_skips}). Stopping"
+    break
+  fi
+  page=$(( page + 1 ))
+done
+
+format_list() {
+  title="$(echo "$1" | jq -r .title)"
+  number="$(echo "$1" | jq -r .number)"
+  user="$(echo "$1" | jq -r .user.login)"
+  echo "- ${title} #${number} ${user}"
+}
+
+format_json() {
+  echo "$1"
+}
+
+for ref in $(git rev-list --reverse "${range[@]}"); do
+  [ -n "${found_refs[$ref]}" ] || continue
+
+  case "$format" in
+    list) format_list "${found_refs[$ref]}" ;;
+    json) format_json "${found_refs[$ref]}" ;;
+    *) usage_error "Invalid format $format"
+  esac
+done

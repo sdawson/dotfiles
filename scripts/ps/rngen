@@ -1,0 +1,357 @@
+#!/usr/bin/env bash
+
+# Source: https://github.com/justinhoward/misc-scripts/blob/master/bin/rngen
+set -e
+
+export PAGER="${PAGER:-less}"
+export LESS="$LESS -R"
+
+usage() {
+  summary
+  msg && arguments
+  [ -n "$1" ] && msg && examples
+}
+
+summary() {
+  cat >&2 <<EOF
+Usage: $(color 2 "$(basename "$0")") [OPTIONS] [...RANGE]
+Interactively generate release notes
+EOF
+}
+
+arguments() {
+  cat >&2 <<EOF
+$(color 3 RANGE)
+A commit range string for "git rev-list". By default, this is the
+latest tag to the current HEAD.
+
+$(color 3 OPTIONS)
+$(color 2 "-b|--branch") BRANCH     The git branch to operate on (default HEAD)
+$(color 2 "-c|--close-jira")        Closes all jira issues
+$(color 2 "-h|--help")              Show this help message
+$(color 2 "-i|--interactive")       Review release notes interactively. Interactive output is
+                         sent to STDERR so notes can still be piped
+$(color 2 "-N|--no-color")          Don't output any ANSI colors
+$(color 2 "-o|--owner") OWNER       The GitHub repository owner (defaults to the current repo owner)
+$(color 2 "-p|--previous-release")  Set RANGE from the second latest tag to the latest tag
+$(color 2 "-r|--repo") REPO         The GitHub repository (defaults to the current repo)
+$(color 2 "-s|--max-skips") SKIPS   The maximum number of PRs that will be skipped before
+                                      deciding that we're done (default 50).
+$(color 2 "-t|--tag")               Automatically create an annotated git tag in the format vYY.MM.DD
+$(color 2 "-T|--signed-tag")        Same as -t, but signs the tag
+$(color 2 "-v|--verbose")           Print verbose messaging
+EOF
+}
+
+examples() {
+  cat >&2 <<EOF
+$(color 3 EXAMPLES)
+
+$(color 4 Interactive Mode)
+$ rngen -iT
+GitHub #4329 DEV-3145 Remove spacebar heating by randallm
+DEV-3145 CPU overheats when holding down spacebar
+Description: CPU overheats when holding down spacebar
+[(d)one,(m)ore,(e)dit,(s)kip,(g)ithub,(j)ira]: d
+
+GitHub #4337 DEV-3163 Fix epoch fail by randallm
+DEV-3163 Crash when using pre-1970 dates
+Description: Crash when using pre-1970 dates
+[(d)one,(m)ore,(e)dit,(s)kip,(g)ithub,(j)ira]: d
+
+foobar \`v2022.11.16.1\`
+
+- CPU overheats when holding down spacebar [DEV-3145](https://foo.atlassian.net/browse/DEV-3145)
+- Crash when using pre-1970 dates [DEV-3163](https://foo.atlassian.net/browse/DEV-3163)
+
+\`\`\`
+- DEV-3145 Remove spacebar heating #4329 randallm
+- DEV-3163 Fix epoch fail #4337 randallm
+\`\`\`
+
+Tagged release v2022.11.16.1
+Push v2022.11.16.1 to upstream origin? (y/N): y
+
+$(color 4 With Range)
+$ rngen v2022.11.03..v2022.11.05
+
+$(color 4 Close Issues from Previous Release)
+$ rngen -pc
+EOF
+}
+
+msg() {
+  printf '%s\n' "$*" >&2
+}
+
+verbose() {
+  [ -n "$verbose" ] && msg "$@"
+}
+
+color() {
+  [ -z "$no_color" ] && tput setaf "$1"
+  echo -n "${@:2}"
+  [ -z "$no_color" ] && tput sgr0
+}
+
+err() {
+  [ -z "$no_color" ] && tput setaf 1
+  msg "$@"
+  [ -z "$no_color" ] && tput sgr0
+}
+
+error_exit() {
+  err "$@"
+  exit 1
+}
+
+usage_error() {
+  [ "$#" -gt 0 ] && err "$@" $'\n'
+  usage
+  exit 1
+}
+
+getopt_error() {
+  usage_error "$(echo "$1" | sed -n 's/.*: //1p')"
+}
+
+open_url() {
+  if command -v xdg-open > /dev/null; then
+    xdg-open "$1"
+  elif command -v open > /dev/null; then
+    open "$1"
+  else
+    echo "$1"
+  fi
+}
+
+jira_url() {
+  if [ -n "$jira_namespace" ]; then
+    echo "https://$jira_namespace/browse/$1"
+  fi
+}
+
+if ! command -v gh-changelog > /dev/null; then
+  error_exit 'gh-changelog is required https://github.com/justinhoward/misc-scripts/blob/master/bin/gh-changelog'
+fi
+
+if ! command -v jira-terminal > /dev/null; then
+  error_exit 'jira-terminal is required https://github.com/amritghimire/jira-terminal'
+fi
+
+if ! command -v gh > /dev/null; then
+  error_exit 'The GitHub CLI (gh) is required https://cli.github.com/'
+fi
+
+if ! command -v jq > /dev/null; then
+  error_exit 'The jq JSON parser is required https://stedolan.github.io/jq/'
+fi
+
+shortopts='b:chiNo:pr:s:tTv'
+longopts='branch:,close-jira,help,interactive,no-color,owner:,previous-release,repo:,max-skips:,tag,signed-tag,verbose'
+
+if ! getopt -T > /dev/null; then
+  options="$(getopt \
+    --options "$shortopts" \
+    --long "$longopts" \
+    -n "$(basename "$0")" \
+    -- "$@" \
+  2>&1)" || getopt_error "$options"
+else
+  options="$(getopt \
+    "$shortopts" \
+    "$@" \
+  2>&1)" || getopt_error "$options"
+fi
+
+eval set -- "$options"
+
+while true; do
+  case "$1" in
+    -b|--branch) changelog_opts+=(-b "$2"); branch="$2"; shift 2;;
+    -c|--close-jira) close_jira=1; shift ;;
+    -h|--help) help=1; shift ;;
+    -i|--interactive) interactive=1; shift ;;
+    -N|--no-color) no_color=1; shift ;;
+    -o|--owner) changelog_opts+=(-o "$2"); shift 2;;
+    -p|--previous-release) previous_release=1; shift ;;
+    -r|--repo) changelog_opts+=(-r "$2"); shift 2 ;;
+    -s|--max-skips) changelog_opts+=(-s "$2"); shift 2 ;;
+    -t|--tag) tag_flag=a; shift ;;
+    -T|--signed-tag) tag_flag=s; shift ;;
+    -v|--verbose) verbose=1; shift ;;
+    --) shift; break ;;
+  esac
+done
+
+range=("$@")
+
+[ -n "$help" ] && usage 1 2>&1 | LESS="$LESS -F" "$PAGER" && exit
+
+if [ -n "$previous_release" ]; then
+  [ "${#range[@]}" -gt 0 ] && usage_error 'Cannot specify -p and RANGE'
+
+  if [ -z "$branch" ]; then
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    [ "$?" -ne 0 ] && error_exit 'Could not get git head branch name'
+  fi
+
+  latest="$(git describe --tags --abbrev=0 "$branch")"
+  previous="$(git describe --tags --abbrev=0 "$latest^")"
+  range=("$previous..$latest")
+fi
+
+changelog_cmd=(gh-changelog -f json "${range[@]}")
+while read -r line; do
+  changelog_json+=("$line")
+done < <("${changelog_cmd[@]}")
+jira_namespace="$(jq -r .namespace < ~/.jira_terminal_configuration.json)"
+
+changelog_list=()
+detail_list=()
+jira_issues=()
+for line in "${changelog_json[@]}"; do
+  title="$(echo "$line" | jq -r .title)"
+  number="$(echo "$line" | jq -r .number)"
+  user="$(echo "$line" | jq -r .user.login)"
+  body="$(echo "$line" | jq -r .body)"
+  gh_url="$(echo "$line" | jq -r .html_url)"
+  jira_issue="$(echo "$title $body" | grep -oE '[A-Z]{2,8}-[0-9]{1,6}' | head -1)"
+  if [ -n "$jira_issue" ]; then
+    jira_issues+=("$jira_issue")
+    set -o pipefail
+    if ! jira_detail="$(jira-terminal detail "$jira_issue" | tail -n+2)"; then
+      jira_detail=
+      jira_issue=
+    fi
+    set +o pipefail
+  fi
+
+  if [ -n "$jira_issue" ]; then
+    description="$(echo "$jira_detail" | head -1)"
+  else
+    description="$title"
+  fi
+
+  if [ -n "$interactive" ]; then
+    while true; do
+      msg "GitHub #$number $title by $user"
+      if [ -n "$jira_issue" ]; then
+        msg "$jira_issue $(echo "$jira_detail" | head -1)"
+      fi
+      msg "Description: $description"
+
+      prompt="($(color 4 d))one,($(color 4 m))ore,($(color 4 e))dit,($(color 4 s))kip,($(color 4 g))ithub"
+      [ -n "$jira_issue" ] && prompt+=",($(color 4 j))ira"
+      read -r -p "$prompt: " answer
+      msg
+      case "$answer" in
+        d|done)
+          break
+          ;;
+        m|more)
+          (
+            cat <<EOF
+$(color 2 "GitHub #$number $title by $user")
+$(color 2 ─────────────────────────────────────────────────────────────────)
+$body
+EOF
+
+            if [ -n "$jira_issue" ]; then
+              cat <<EOF
+
+$(color 2 "$jira_issue")
+$(color 2 ─────────────────────────────────────────────────────────────────)
+$jira_detail
+EOF
+            fi
+          ) | sed 's/\r$//' | "$PAGER"
+          ;;
+        e|edit)
+          read -r -p "Description: " -e new_description
+          [ -n "$new_description" ] && description="$new_description"
+          ;;
+        s|skip)
+          description=""
+          break
+          ;;
+        j|jira)
+          if [ -n "$jira_issue" ]; then
+            open_url "$(jira_url "$jira_issue")"
+          else
+            err "No Jira issue to open"
+          fi
+          ;;
+        g|github)
+          open_url "$gh_url"
+          ;;
+        *)
+          err "Invalid option $answer"
+          ;;
+      esac
+    done
+  fi
+
+  if [ -n "$description" ]; then
+    detail_line="- $(echo "$description" | tr '[' '(' | tr ']' ')')"
+    if [ -n "$jira_issue" ]; then
+      detail_line+=" [$jira_issue]($(jira_url "$jira_issue"))"
+    else
+      detail_line+=" (no Jira)"
+    fi
+    detail_list+=("$detail_line")
+    changelog_list+=("- ${title} #${number} ${user}")
+  fi
+done
+
+if [ "${#changelog_list[@]}" -gt 0 ]; then
+  if [ -n "$tag_flag" ] || [ -n "$previous_release" ]; then
+    repo_name="$(gh repo view --json name --jq .name)"
+  fi
+
+  if [ -n "$tag_flag" ]; then
+    tag_date="$(date +'%Y.%m.%d')"
+    tag_name="v$tag_date"
+    tag_suffix=
+    while git show-ref "$tag_name" > /dev/null; do
+      tag_suffix=$((tag_suffix + 1))
+      tag_name="v$tag_date.$tag_suffix"
+    done
+
+    # shellcheck disable=2016
+    printf '%s `%s`\n\n' "$repo_name" "$tag_name"
+  elif [ -n "$previous_release" ]; then
+    # shellcheck disable=2016
+    printf '%s `%s`\n\n' "$repo_name" "$latest"
+  fi
+
+  detail_msg="$(printf '%s\n' "${detail_list[@]}")"
+  printf '%s\n' "$detail_msg"
+
+  changelog_msg="$(printf '%s\n' "${changelog_list[@]}")"
+  # shellcheck disable=2016
+  printf '\n```\n%s\n```\n' "$changelog_msg"
+
+  if [ -n "$tag_flag" ]; then
+    tag_msg="$(printf 'Release %s\n\n%s' "$tag_name" "$changelog_msg")"
+    git tag -"$tag_flag" -m "$tag_msg" "$tag_name"
+
+    msg "Tagged release $tag_name"
+
+    if [ -n "$interactive" ]; then
+      upstream="$(git rev-parse --symbolic-full-name '@{push}' | cut -d'/' -f3)"
+      read -r -p "Push $tag_name to upstream $upstream? (y/N): " answer
+      if [ "$answer" = y ]; then
+        git push "$upstream" "$tag_name"
+      fi
+    fi
+  fi
+fi
+
+if [ -n "$close_jira" ]; then
+  for issue in "${jira_issues[@]}"; do
+    jira-terminal update "$issue" --field resolution --value Done > /dev/null \
+      && jira-terminal transition Closed --ticket "$issue" > /dev/null \
+      && msg "Closed $issue"
+  done
+fi
