@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# Source: https://github.com/justinhoward/misc-scripts/blob/master/bin/rngen
 set -e
 
 export PAGER="${PAGER:-less}"
@@ -29,7 +28,7 @@ $(color 3 OPTIONS)
 $(color 2 "-b|--branch") BRANCH     The git branch to operate on (default HEAD)
 $(color 2 "-c|--close-jira")        Closes all jira issues
 $(color 2 "-h|--help")              Show this help message
-$(color 2 "-i|--interactive")       Review release notes interactively. Interactive output is
+$(color 2 "-i|--interactive")       Review release notes interactively. Interactive output is 
                          sent to STDERR so notes can still be piped
 $(color 2 "-N|--no-color")          Don't output any ANSI colors
 $(color 2 "-o|--owner") OWNER       The GitHub repository owner (defaults to the current repo owner)
@@ -126,8 +125,35 @@ open_url() {
 }
 
 jira_url() {
-  if [ -n "$jira_namespace" ]; then
+  if ! command -v jira >/dev/null 2>&1 && [ -n "$jira_namespace" ]; then
     echo "https://$jira_namespace/browse/$1"
+  else
+    jira open "$1" --no-browser
+  fi
+}
+
+jira_issue_detail() {
+  if ! command -v jira >/dev/null 2>&1; then
+    jira-terminal detail "$1" | tail -n+2
+  else
+    jira issue view "$1"
+  fi
+}
+
+jira_summary_from_detail() {
+  if ! command -v jira >/dev/null 2>&1; then
+    echo "$jira_detail" | head -1
+  else
+    echo "$1" | tail -n+4 |head -n1 | sed 's/\s*#\s*//' | sed 's/\s*$//'
+  fi
+}
+
+jira_close() {
+  if ! command -v jira >/dev/null 2>&1; then
+    jira-terminal update "$1" --field resolution --value Done > /dev/null \
+      && jira-terminal transition Closed --ticket "$1" > /dev/null
+  else
+    jira issue move "$1" Closed --resolution Done > /dev/null
   fi
 }
 
@@ -135,8 +161,12 @@ if ! command -v gh-changelog > /dev/null; then
   error_exit 'gh-changelog is required https://github.com/justinhoward/misc-scripts/blob/master/bin/gh-changelog'
 fi
 
-if ! command -v jira-terminal > /dev/null; then
-  error_exit 'jira-terminal is required https://github.com/amritghimire/jira-terminal'
+if ! command -v jira > /dev/null; then
+  if command -v jira-terminal > /dev/null; then
+    err 'using jira-terminal with rngen is deprecated, use jira-cli https://github.com/ankitpokhrel/jira-cli'
+  else
+    error_exit 'jira-cli is required https://github.com/ankitpokhrel/jira-cli'
+  fi
 fi
 
 if ! command -v gh > /dev/null; then
@@ -205,7 +235,10 @@ changelog_cmd=(gh-changelog -f json "${range[@]}")
 while read -r line; do
   changelog_json+=("$line")
 done < <("${changelog_cmd[@]}")
-jira_namespace="$(jq -r .namespace < ~/.jira_terminal_configuration.json)"
+
+if ! command -v jira >/dev/null 2>&1; then
+  jira_namespace="$(jq -r .namespace < ~/.jira_terminal_configuration.json)"
+fi
 
 changelog_list=()
 detail_list=()
@@ -220,7 +253,7 @@ for line in "${changelog_json[@]}"; do
   if [ -n "$jira_issue" ]; then
     jira_issues+=("$jira_issue")
     set -o pipefail
-    if ! jira_detail="$(jira-terminal detail "$jira_issue" | tail -n+2)"; then
+    if ! jira_detail="$(jira_issue_detail "$jira_issue")"; then
       jira_detail=
       jira_issue=
     fi
@@ -228,7 +261,7 @@ for line in "${changelog_json[@]}"; do
   fi
 
   if [ -n "$jira_issue" ]; then
-    description="$(echo "$jira_detail" | head -1)"
+    description="$(jira_summary_from_detail "$jira_detail")"
   else
     description="$title"
   fi
@@ -350,8 +383,6 @@ fi
 
 if [ -n "$close_jira" ]; then
   for issue in "${jira_issues[@]}"; do
-    jira-terminal update "$issue" --field resolution --value Done > /dev/null \
-      && jira-terminal transition Closed --ticket "$issue" > /dev/null \
-      && msg "Closed $issue"
+    jira_close "$issue" && msg "Closed $issue"
   done
 fi
