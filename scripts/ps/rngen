@@ -144,7 +144,7 @@ jira_summary_from_detail() {
   if ! command -v jira >/dev/null 2>&1; then
     echo "$jira_detail" | head -1
   else
-    echo "$1" | tail -n+4 |head -n1 | sed 's/\s*#\s*//' | sed 's/\s*$//'
+    echo "$1" | tail -n+4 |head -n1 | sed 's/\s*#\s*//' | awk '{$1=$1};1'
   fi
 }
 
@@ -243,98 +243,109 @@ fi
 changelog_list=()
 detail_list=()
 jira_issues=()
+last_pr_number="0"
 for line in "${changelog_json[@]}"; do
   title="$(echo "$line" | jq -r .title)"
   number="$(echo "$line" | jq -r .number)"
   user="$(echo "$line" | jq -r .user.login)"
   body="$(echo "$line" | jq -r .body)"
+  head_branch="$(echo "$line" | jq -r .head.ref)"
   gh_url="$(echo "$line" | jq -r .html_url)"
-  jira_issue="$(echo "$title $body" | grep -oE '[A-Z]{2,8}-[0-9]{1,6}' | head -1)"
-  if [ -n "$jira_issue" ]; then
-    jira_issues+=("$jira_issue")
-    set -o pipefail
-    if ! jira_detail="$(jira_issue_detail "$jira_issue")"; then
-      jira_detail=
-      jira_issue=
-    fi
-    set +o pipefail
+  pr_jira_issues=($(echo "$title $body $head_branch" | grep -oE '[A-Z]{2,8}-[0-9]{1,6}' | sort -u))
+  if [ "${#pr_jira_issues[@]}" == "0" ]; then
+    pr_jira_issues=("")
   fi
-
-  if [ -n "$jira_issue" ]; then
-    description="$(jira_summary_from_detail "$jira_detail")"
-  else
-    description="$title"
-  fi
-
-  if [ -n "$interactive" ]; then
-    while true; do
-      msg "GitHub #$number $title by $user"
-      if [ -n "$jira_issue" ]; then
-        msg "$jira_issue $(echo "$jira_detail" | head -1)"
+  for jira_issue in "${pr_jira_issues[@]}"; do
+    if [ -n "$jira_issue" ]; then
+      jira_issues+=("$jira_issue")
+      jira_issues+=("$jira_issue")
+      set -o pipefail
+      if ! jira_detail="$(jira_issue_detail "$jira_issue")"; then
+        jira_detail=
+        jira_issue=
       fi
-      msg "Description: $description"
+      set +o pipefail
+    fi
 
-      prompt="($(color 4 d))one,($(color 4 m))ore,($(color 4 e))dit,($(color 4 s))kip,($(color 4 g))ithub"
-      [ -n "$jira_issue" ] && prompt+=",($(color 4 j))ira"
-      read -r -p "$prompt: " answer
-      msg
-      case "$answer" in
-        d|done)
-          break
-          ;;
-        m|more)
-          (
-            cat <<EOF
+    if [ -n "$jira_issue" ]; then
+      description="$(jira_summary_from_detail "$jira_detail")"
+    else
+      description="$title"
+    fi
+
+    if [ -n "$interactive" ]; then
+      while true; do
+        msg "GitHub #$number $title by $user"
+        if [ -n "$jira_issue" ]; then
+          msg "$jira_issue $(echo "$jira_detail" | head -1)"
+        fi
+        msg "Description: $description"
+
+        prompt="($(color 4 d))one,($(color 4 m))ore,($(color 4 e))dit,($(color 4 s))kip,($(color 4 g))ithub"
+        [ -n "$jira_issue" ] && prompt+=",($(color 4 j))ira"
+        read -r -p "$prompt: " answer
+        msg
+        case "$answer" in
+          d|done)
+            break
+            ;;
+          m|more)
+            (
+              cat <<EOF
 $(color 2 "GitHub #$number $title by $user")
 $(color 2 ─────────────────────────────────────────────────────────────────)
 $body
 EOF
 
-            if [ -n "$jira_issue" ]; then
-              cat <<EOF
+              if [ -n "$jira_issue" ]; then
+                cat <<EOF
 
 $(color 2 "$jira_issue")
 $(color 2 ─────────────────────────────────────────────────────────────────)
 $jira_detail
 EOF
+              fi
+            ) | sed 's/\r$//' | "$PAGER"
+            ;;
+          e|edit)
+            read -r -p "Description: " -e new_description
+            [ -n "$new_description" ] && description="$new_description"
+            ;;
+          s|skip)
+            description=""
+            break
+            ;;
+          j|jira)
+            if [ -n "$jira_issue" ]; then
+              open_url "$(jira_url "$jira_issue")"
+            else
+              err "No Jira issue to open"
             fi
-          ) | sed 's/\r$//' | "$PAGER"
-          ;;
-        e|edit)
-          read -r -p "Description: " -e new_description
-          [ -n "$new_description" ] && description="$new_description"
-          ;;
-        s|skip)
-          description=""
-          break
-          ;;
-        j|jira)
-          if [ -n "$jira_issue" ]; then
-            open_url "$(jira_url "$jira_issue")"
-          else
-            err "No Jira issue to open"
-          fi
-          ;;
-        g|github)
-          open_url "$gh_url"
-          ;;
-        *)
-          err "Invalid option $answer"
-          ;;
-      esac
-    done
-  fi
-
-  if [ -n "$description" ]; then
-    detail_line="- $(echo "$description" | tr '[' '(' | tr ']' ')')"
-    if [ -n "$jira_issue" ]; then
-      detail_line+=" [$jira_issue]($(jira_url "$jira_issue"))"
-    else
-      detail_line+=" (no Jira)"
+            ;;
+          g|github)
+            open_url "$gh_url"
+            ;;
+          *)
+            err "Invalid option $answer"
+            ;;
+        esac
+      done
     fi
-    detail_list+=("$detail_line")
-    changelog_list+=("- ${title} #${number} ${user}")
-  fi
+
+    if [ -n "$description" ]; then
+      detail_line="- $(echo "$description" | tr '[' '(' | tr ']' ')')"
+      if [ -n "$jira_issue" ]; then
+        detail_line+=" [$jira_issue]($(jira_url "$jira_issue"))"
+      else
+        detail_line+=" (no Jira)"
+      fi
+      detail_list+=("$detail_line")
+      if [ "$last_pr_number" != "$number" ]; then
+        changelog_list+=("- ${title} #${number} ${user}")
+        last_pr_number=$number
+      fi
+    fi
+  done
 done
 
 if [ "${#changelog_list[@]}" -gt 0 ]; then
@@ -382,7 +393,8 @@ if [ "${#changelog_list[@]}" -gt 0 ]; then
 fi
 
 if [ -n "$close_jira" ]; then
-  for issue in "${jira_issues[@]}"; do
+  jira_issues_unique=$(printf "%s\n" "${jira_issues[@]}" | sort -u)
+  for issue in "${jira_issues_unique[@]}"; do
     jira_close "$issue" && msg "Closed $issue"
   done
 fi
