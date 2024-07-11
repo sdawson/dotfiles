@@ -68,7 +68,7 @@
   br = branch
   bd = branch -d
   bdd = branch -D
-  bn = branch -m # new branch name here
+  bn = branch -m # rename a branch by including the new branch name at the end of this
   rb = rebase
   rbi = rebase -i
   rbc = rebase --continue
