@@ -65,6 +65,7 @@
   co = checkout
   c = commit
   ca = commit --amend
+  cn = commit --amend --no-edit # amend without opening the commit message
   f = fetch
   br = branch
   bd = branch -d
