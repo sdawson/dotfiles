@@ -21,7 +21,6 @@ Icon?
 *.log
 
 # DB
-*.sql
 *.sqlite
 
 # Vim
