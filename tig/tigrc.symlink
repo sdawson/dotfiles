@@ -15,3 +15,5 @@ bind status n !git add --patch %(file)
 
 bind stash D !?git stash drop %(stash)
 bind stash A !?git stash apply %(stash)
+
+color cursor color0 color2
