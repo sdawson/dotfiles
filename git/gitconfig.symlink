@@ -1,15 +1,15 @@
 [user]
-	name = Sophie Dawson
-	email = sophiecdawson@gmail.com
+  name = Sophie Dawson
+  email = sophiecdawson@gmail.com
 [init]
   defaultBranch = main
 [mergetool "diffmerge"]
-	cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
-	trustExitCode = false
+  cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+  trustExitCode = false
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [core]
   whitespace = trailing-space,space-before-tab
   excludesfile = ~/.gitignore
