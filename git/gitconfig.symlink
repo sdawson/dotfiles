@@ -50,44 +50,44 @@
 [interactive]
   diffFilter = delta --color-only
 [alias]
-  la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
-  ls = log --pretty=oneline
-  ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'
-  lp = log --format=%B -n 1 # print out the full commit message for a particular commit
-  fl = log -u # show the history of a particular file
-  upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
-  graph = log --graph --all --decorate --stat --date=iso # more complex git log
-  rtr = "!f() { git reset --hard $1; }; f"
-  cp = cherry-pick
-  st = status
-  shs = status -sb
-  cl = clone
-  co = checkout
-  c = commit
-  ca = commit --amend
-  cn = commit --amend --no-edit # amend without opening the commit message
-  f = fetch
+  ap = add --patch
+  an = add --intent-to-add # makes new files unstaged, so they can be incrementally staged
   br = branch
   bd = branch -d
   bdd = branch -D
   bn = branch -m # rename a branch by including the new branch name at the end of this
+  c = commit
+  ca = commit --amend
+  cn = commit --amend --no-edit # amend without opening the commit message
+  cp = cherry-pick
+  cl = clone
+  co = checkout
+  f = fetch
+  fl = log -u # show the history of a particular file
+  ffa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+  fixup = '!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f'
+  graph = log --graph --all --decorate --stat --date=iso # more complex git log
+  it = '!git init && git commit -m "root" --allow-empty'
+  la = "!git config -l | grep alias | cut -c 7-" # list all git aliases
+  ls = log --pretty=oneline
+  ll = log --graph --oneline --decorate --date=short --all --pretty=format:'%ad %h %Cgreen%an %C(auto)%d %Creset%s'
+  lp = log --format=%B -n 1 # print out the full commit message for a particular commit
+  po = "!git push -u origin $(git symbolic-ref --short HEAD)"
+  purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
   rb = rebase
   rbi = rebase -i
   rbc = rebase --continue
   rba = rebase --abort
+  recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
+  rtr = "!f() { git reset --hard $1; }; f"
   sp = push --force-with-lease # safe push (checks the local copy of what you're pushing is up to date with upstream before force pushing)
   spo = "!git push --force-with-lease -u origin $(git symbolic-ref --short HEAD)"
-  po = "!git push -u origin $(git symbolic-ref --short HEAD)"
-  it = '!git init && git commit -m "root" --allow-empty'
-  wd = diff --word-diff # diff on words for viewing prose diffs
-  ap = add --patch
-  an = add --intent-to-add # makes new files unstaged, so they can be incrementally staged
+  st = status
+  shs = status -sb
   unst = restore --staged
   uncommit = reset --soft HEAD^
-  purge-merged = !git branch --merged | tr -d '* ' | grep -v develop | grep -v master | xargs git branch -d
-  recent = !git reflog | grep checkout | head -100 | awk '{print $8}' | cat -n | sort -k2 | uniq -f1 | sort -k1 | cut -f2- | head -10
-  ffa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
-  fixup = '!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f'
+  upstream = log --oneline --no-merges HEAD..origin/main # see what's happened at origin/master since you last pulled onto the current branch
+  wd = diff --word-diff # diff on words for viewing prose diffs
 # This HTTPS -> SSH switch for github urls is so that go can successfully find
 # and download private go modules when running go mod
 # [url "ssh://github.com/Zettelkasten-Method/The-Archive-Themes"]
