@@ -19,8 +19,11 @@ end
 desc "create all symlinks only"
 task :create_symlinks do
   linkables = Dir.glob('*/**{.symlink}')
+  config_linkables = Dir.glob('config/**{.symlink}')
 
-  create_links linkables
+  non_config_linkables = linkables - config_linkables
+  create_links non_config_linkables
+  create_config_links config_linkables
 end
 
 def create_links linkables
@@ -36,6 +39,27 @@ def create_links linkables
     target = "#{ENV["HOME"]}/.#{file}"
 
     create_link(linkable, file, target, skip_all: skip_all, overwrite_all: overwrite_all, backup_all: backup_all)
+  end
+end
+
+def create_config_links linkables
+  config_dir = "#{ENV["HOME"]}/.config"
+  `mkdir -p config_dir`
+
+  skip_all = false
+  overwrite_all = false
+  backup_all = false
+
+  # Rather than linking the files inside of the various config subdirectories,
+  # this loop links the directories themselves
+  linkables.each do |linkable|
+    overwrite = false
+    backup = false
+
+    dir = linkable.split('/').last.split('.symlink').last
+    target = "#{ENV["HOME"]}/.config/#{dir}"
+
+    create_link(linkable, dir, target, skip_all: skip_all, overwrite_all: overwrite_all, backup_all: backup_all)
   end
 end
 
@@ -122,6 +146,12 @@ def remove_karabiner_config
   if File.symlink?(karabiner_config)
     FileUtils.rm(karabiner_config)
   end
+end
+
+desc "install config files that live in ~/.config"
+task :config do
+  config_linkables = Dir.glob('config/**{.symlink}')
+  create_config_links config_linkables
 end
 
 task :default => 'install'
