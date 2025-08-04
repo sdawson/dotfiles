@@ -1,0 +1,37 @@
+#! /usr/bin/env ruby
+# A script for backing up the contents of herzog via rsync
+
+require 'optparse'
+
+options = {
+  destination: "sciamma:/home/soph"
+}
+OptionParser.new do |opts|
+  opts.banner = "Usage: rsyncnas [options]"
+
+  opts.on("-sSOURCE", "--source SOURCE", "Source directory to backup") do |s|
+    options[:source] = s
+  end
+
+  opts.on("dDESTINATION", "--destination DESTINATION", "Destination host:path for the backup") do |d|
+    optionts[:destination] = d
+  end
+end.parse!
+
+unless options.keys.include?(:source)
+  STDERR.puts "Source argument is required"
+  exit 1
+end
+
+unless File.exist?(options[:source])
+  STDERR.puts "Source directory does not exist"
+  exit 1
+end
+
+unless File.directory?(options[:source])
+  STDERR.puts "Source argument must specify a directory"
+  exit 1
+end
+
+final_source = File.expand_path(options[:source])
+exec("rsync -ahPvi \"#{final_source}\" \"#{options[:destination]}\"")
