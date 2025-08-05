@@ -28,10 +28,5 @@ unless File.exist?(options[:source])
   exit 1
 end
 
-unless File.directory?(options[:source])
-  STDERR.puts "Source argument must specify a directory"
-  exit 1
-end
-
 final_source = File.expand_path(options[:source])
 exec("rsync -ahPvi \"#{final_source}\" \"#{options[:destination]}\"")
