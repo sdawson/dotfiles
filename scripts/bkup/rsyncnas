@@ -29,4 +29,4 @@ unless File.exist?(options[:source])
 end
 
 final_source = File.expand_path(options[:source])
-exec("rsync -ahPvi \"#{final_source}\" \"#{options[:destination]}\"")
+exec("rsync -rlpAXtgoDivPh --fake-super \"#{final_source}\" \"#{options[:destination]}\"")
