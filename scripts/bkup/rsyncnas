@@ -14,7 +14,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("dDESTINATION", "--destination DESTINATION", "Destination host:path for the backup") do |d|
-    optionts[:destination] = d
+    options[:destination] = d
   end
 end.parse!
 
