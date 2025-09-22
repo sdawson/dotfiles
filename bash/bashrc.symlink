@@ -118,9 +118,6 @@ elif [ "$unamestr" = "Darwin" ]; then
   export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
-  # path fixes for homebrew git
-  export PATH=/usr/local/opt/gettext/bin:${PATH}
-
   if command_exists rbenv; then
     eval "$(rbenv init -)"
   fi
