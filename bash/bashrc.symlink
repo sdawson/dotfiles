@@ -170,9 +170,6 @@ elif [ "$unamestr" = "Darwin" ]; then
     export PS1='[\u@\h \W$(__git_ps1)]\$ '
   fi
 
-  # support using lesspipe to enable listing the files in a zip
-  # via `less name_of_file.zip`
-  export LESSOPEN="|/opt/homebrew/bin/lesspipe.sh %s"
 
   alias ls='ls -G'
   alias sl='ls -G'
