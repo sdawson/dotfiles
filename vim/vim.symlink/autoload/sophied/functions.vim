@@ -134,19 +134,42 @@ endfunction
 
 function! sophied#functions#OnLspBufferEnabled() abort
   setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes # what does this mean?
+  " if yes, signcolumn shows a bar to the left of the line number column
+  " used for diagnostic signs (e.g. E>)
+  setlocal signcolumn=no
+  let s:lspenabled = 0
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gr <plug>(lsp-references)
 
   let g:lsp_format_sync_timeout=1000
+  let g:lsp_diagnostics_signs_enabled = 0
+  let g:lsp_diagnostics_virtual_text_enabled = 1
+  let g:lsp_diagnostics_virtual_text_align = "after"
   let g:lsp_inlay_hints_enabled = 1
+  let g:lsp_inlay_hints_delay = 300
   let g:lsp_inlay_hints_mode = {
-  \  'normal': ['always'],
+  \  'normal': ['curline'],
   \}
+  let g:lsp_document_highlight_enabled = 0
   hi link lspInlayHintsType Comment
   hi link lspInlayParameter Comment
+  hi link lspErrorVirtualText Error
+  hi link lspWarningVirtualText WarningMsg
+  hi link lspInformationVirtualText DiffAdd
+  hi link lspHintVirtualText DiffChange
+  lsp#disable_diagnostics_for_buffer()
 endfunction
 
 function! sophied#functions#ToggleLsp() abort
+  if exists('s:lspenabled')
+    if s:lspenabled
+      echom "disabling lsp"
+      call lsp#disable_diagnostics_for_buffer()
+    else
+      echom "enabling lsp"
+      call lsp#enable_diagnostics_for_buffer()
+    endif
+    let s:lspenabled = !s:lspenabled
+  endif
 endfunction
