@@ -46,6 +46,7 @@ endif
 " A plugin that tries to intelligently turn off highlighting when
 " you're done searching
 Plug 'romainl/vim-cool'
+Plug 'sdawson/noether'
 
 call plug#end()
 endif
