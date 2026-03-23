@@ -9,6 +9,11 @@ if executable('rust-analyzer')
     \ 'name': 'rust-analyzer',
     \ 'cmd': {server_info->['rust-analyzer']},
     \ 'allowlist': ['rust'],
+    \ 'initialization_options': {
+    \   'completion': {
+    \     'autoimport': { 'enable': v:true }
+    \   }
+    \ },
     \ })
 endif
 

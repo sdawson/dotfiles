@@ -141,6 +141,7 @@ function! sophied#functions#OnLspBufferEnabled() abort
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gc <plug>(lsp-code-action)
 
   let g:lsp_format_sync_timeout=1000
   let g:lsp_diagnostics_signs_enabled = 0
