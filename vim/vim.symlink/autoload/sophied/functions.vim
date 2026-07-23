@@ -159,7 +159,7 @@ function! sophied#functions#OnLspBufferEnabled() abort
   hi link lspWarningVirtualText WarningMsg
   hi link lspInformationVirtualText DiffAdd
   hi link lspHintVirtualText DiffChange
-  lsp#disable_diagnostics_for_buffer()
+  call lsp#disable_diagnostics_for_buffer()
 endfunction
 
 function! sophied#functions#ToggleLsp() abort
