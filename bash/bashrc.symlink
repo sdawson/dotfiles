@@ -23,6 +23,8 @@ export COLUMNS
 
 export TRANSMISSION_HOME=${HOME}/.transmission
 
+export LESS="-SFRX"
+
 # usage:
 # if command_exists mvim; then
 #   export BLAH="mvim --no-fork"
