@@ -13,6 +13,8 @@
 [core]
   whitespace = trailing-space,space-before-tab
   excludesfile = ~/.gitignore
+[commit]
+  verbose = true
 [diff]
   renames = copies
   mnemonicprefix = true
