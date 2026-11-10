@@ -13,7 +13,10 @@
   let
   in {
     homeModules.default = { lib, pkgs, username, ... }: {
-      imports = [ ./tester/tester.nix ];
+      imports = [
+        ./tester/tester.nix
+        ./ag/ag.nix
+      ];
       # add some imports for project specific files here.
       # hjem stuff goes here
     };
